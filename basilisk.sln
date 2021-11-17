@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.Logo", "Basilisk.Logo\Basilisk.Logo.csproj", "{D6764B6B-B777-428B-B978-4FAA3A443BDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5D9A1C3-BC2A-475D-BBB5-DDBA251F20C4}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6764B6B-B777-428B-B978-4FAA3A443BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6764B6B-B777-428B-B978-4FAA3A443BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6764B6B-B777-428B-B978-4FAA3A443BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6764B6B-B777-428B-B978-4FAA3A443BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38FA220F-D688-45C1-8F32-C8255B01D0E8}
+	EndGlobalSection
+EndGlobal
