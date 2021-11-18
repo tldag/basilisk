@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Basilisk.Core/Basilisk.Core.csproj" />
+    <ProjectReference Include="$(BasiliskCoreProject)" />
   </ItemGroup>
 
   <ItemGroup>

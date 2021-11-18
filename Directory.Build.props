@@ -23,6 +23,15 @@
     <MicrosoftSourceLinkGitHubVersion>1.1.1</MicrosoftSourceLinkGitHubVersion>
   </PropertyGroup>
   
+  <!-- Solution Projects -->
+
+  <PropertyGroup>
+    <BasiliskCoreProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Core', 'Basilisk.Core.csproj' ))</BasiliskCoreProject>
+    <BasiliskCryptographyProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Cryptography', 'Basilisk.Cryptography.csproj' ))</BasiliskCryptographyProject>
+    <BasiliskGraphicsProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Graphics', 'Basilisk.Graphics.csproj' ))</BasiliskGraphicsProject>
+    <BasiliskIOProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.IO', 'Basilisk.IO.csproj' ))</BasiliskIOProject>
+  </PropertyGroup>
+  
   <!-- Packaging -->
 
   <PropertyGroup Label="Packaging">
