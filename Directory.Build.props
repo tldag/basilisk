@@ -1,18 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
+  
+  <!-- C# Settings -->
 
-  <PropertyGroup Label="C# Settings">
+  <PropertyGroup>
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+  
+  <!-- Versions -->
 
-  <PropertyGroup Label="Version">
+  <PropertyGroup>
     <VersionPrefix>0.0.1</VersionPrefix>
     <VersionSuffix>alpha.1</VersionSuffix>
     <Version Condition="'$(VersionSuffix)' == ''">$(VersionPrefix)</Version>
     <Version Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <MicrosoftSourceLinkGitHubVersion>1.1.1</MicrosoftSourceLinkGitHubVersion>
+  </PropertyGroup>
+  
+  <!-- Packaging -->
+
+  <PropertyGroup Label="Packaging">
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Authors>rhjoerg@gmail.com</Authors>
+    <Company>The TLDAG Project</Company>
+    <Copyright>Copyright &#169; The TLDAG Project. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/tldag/basilisk</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tldag/basilisk.git</RepositoryUrl>
+    <PackageReadmeFile>docs/README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="docs/" />
+  </ItemGroup>
+
+  <!-- Symbol Package -->
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="$(MicrosoftSourceLinkGitHubVersion)" PrivateAssets="All"/>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <SourceLink>true</SourceLink>
+  </PropertyGroup>
+  
+  <!-- Release Notes -->
+
+  <PropertyGroup>
+    <PackageReleaseNotes>
+0.0.1-alpha.1
+- Various initial implementations
+    </PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
