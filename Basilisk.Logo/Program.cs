@@ -3,8 +3,15 @@ using System.Xml;
 
 namespace Basilisk.Logo
 {
+    /// <summary>
+    /// Program class encapsulating <code>Main</code>.
+    /// </summary>
     public static class Program
     {
+        /// <summary>
+        /// Program entry point.
+        /// </summary>
+        /// <returns></returns>
         public static int Main()
         {
             XmlWriterSettings settings = new() { Indent = true, IndentChars = "  ", Encoding = Encoding.UTF8 };
