@@ -30,6 +30,8 @@
     <BasiliskCryptographyProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Cryptography', 'Basilisk.Cryptography.csproj' ))</BasiliskCryptographyProject>
     <BasiliskGraphicsProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Graphics', 'Basilisk.Graphics.csproj' ))</BasiliskGraphicsProject>
     <BasiliskIOProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.IO', 'Basilisk.IO.csproj' ))</BasiliskIOProject>
+    <BasiliskReflectionProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Reflection', 'Basilisk.Reflection.csproj' ))</BasiliskReflectionProject>
+    <BasiliskTestingProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Testing', 'Basilisk.Testing.csproj' ))</BasiliskTestingProject>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(SolutionFileName)' != ''">
