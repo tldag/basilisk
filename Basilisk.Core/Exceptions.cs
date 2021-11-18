@@ -85,7 +85,7 @@ namespace Basilisk.Core
         /// <param name="path">Path to file with bad format.</param>
         /// <returns></returns>
         public static IOException BadFileFormat(string message, string path)
-            => new(string.Format(BadFileFormatFormat, message, path));
+            => new(BadFileFormatFormat.Format(message, path));
 
         /// <summary>
         /// Creates an <code>IOException</code>.
@@ -94,7 +94,7 @@ namespace Basilisk.Core
         /// <param name="file">File with bad format.</param>
         /// <returns></returns>
         public static IOException BadFileFormat(string message, FileInfo file)
-            => new(string.Format(BadFileFormatFormat, message, file.FullName));
+            => new(BadFileFormatFormat.Format(message, file.FullName));
 
         /// <summary>
         /// Creates an <code>ArgumentException</code>.
@@ -121,7 +121,7 @@ namespace Basilisk.Core
         /// <param name="message"></param>
         /// <returns></returns>
         public static ApplicationException InvalidState(string message)
-            => new(string.Format(InvalidStateFormat, message));
+            => new(InvalidStateFormat.Format(message));
 
         /// <summary>
         /// Creates an <code>ApplicationException</code> denoting an execution failure.
@@ -130,7 +130,7 @@ namespace Basilisk.Core
         /// <param name="errors">Errors.</param>
         /// <returns></returns>
         public static ApplicationException ExecutionFailed(int exitCode, IEnumerable<string> errors)
-            => new(string.Format(ExecutionFailedFormat, exitCode, NewLine, string.Join(NewLine, errors)));
+            => new(ExecutionFailedFormat.Format(exitCode, NewLine, errors.Join(NewLine)));
 
         /// <summary>
         /// Creates an <code>ApplicationException</code> denoting an execution failure.
