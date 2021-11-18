@@ -31,6 +31,13 @@
     <BasiliskGraphicsProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Graphics', 'Basilisk.Graphics.csproj' ))</BasiliskGraphicsProject>
     <BasiliskIOProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.IO', 'Basilisk.IO.csproj' ))</BasiliskIOProject>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(SolutionFileName)' != ''">
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>SolutionFileName</_Parameter1>
+      <_Parameter2>$(SolutionFileName)</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
   
   <!-- Packaging -->
 
