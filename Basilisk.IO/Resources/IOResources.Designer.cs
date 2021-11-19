@@ -68,5 +68,14 @@ namespace Basilisk.IO.Resources {
                 return ResourceManager.GetString("BadXmlFormatFormat", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File {0} has no directory..
+        /// </summary>
+        internal static string FileHasNoDirectoryFormat {
+            get {
+                return ResourceManager.GetString("FileHasNoDirectoryFormat", resourceCulture);
+            }
+        }
     }
 }

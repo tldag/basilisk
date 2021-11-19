@@ -10,6 +10,14 @@ namespace Basilisk.Reflection
     public static class AssemblyExtensions
     {
         /// <summary>
+        /// Returns a qualified name of the assembly.
+        /// </summary>
+        /// <param name="assembly">The assembly to inspect.</param>
+        /// <returns>The name or <c>"Unknown"</c>, if not retrievable.</returns>
+        public static string GetQualifiedName(this Assembly assembly)
+            => assembly.GetName().Name ?? "Unknown";
+
+        /// <summary>
         /// Returns the Company attribute value of the given assembly.
         /// </summary>
         /// <param name="assembly">The assembly to inspect.</param>
@@ -18,6 +26,19 @@ namespace Basilisk.Reflection
         {
             if (assembly.GetCustomAttribute<AssemblyCompanyAttribute>() is AssemblyCompanyAttribute attribute)
                 return attribute.Company;
+
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// Returns the Configuration attribute value of the given assembly.
+        /// </summary>
+        /// <param name="assembly">The assembly to inspect.</param>
+        /// <returns>The configuration if the attribute exists, the empty string otherwise.</returns>
+        public static string GetConfiguration(this Assembly assembly)
+        {
+            if (assembly.GetCustomAttribute<AssemblyConfigurationAttribute>() is AssemblyConfigurationAttribute attribute)
+                return attribute.Configuration;
 
             return string.Empty;
         }

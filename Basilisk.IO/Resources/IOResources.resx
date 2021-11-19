@@ -120,4 +120,7 @@
   <data name="BadXmlFormatFormat" xml:space="preserve">
     <value>Cannot deserialize {0}.</value>
   </data>
+  <data name="FileHasNoDirectoryFormat" xml:space="preserve">
+    <value>File {0} has no directory.</value>
+  </data>
 </root>
