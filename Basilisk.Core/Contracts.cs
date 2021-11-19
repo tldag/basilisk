@@ -14,7 +14,7 @@ namespace Basilisk.Core
         public static class State
         {
             /// <summary>
-            /// Throws a <code>PlatformNotSupportedException</code> if the current platform is not in the list of the given supported platforms.
+            /// Throws a <c>PlatformNotSupportedException</c> if the current platform is not in the list of the given supported platforms.
             /// </summary>
             /// <param name="supportedPlatforms">The supported platforms.</param>
             public static void PlatformRequired(params OSPlatform[] supportedPlatforms)

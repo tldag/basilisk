@@ -16,7 +16,7 @@ namespace Basilisk.Core
         /// Tests whether the given character is a digit.
         /// </summary>
         /// <param name="c">The character to test.</param>
-        /// <returns>Whether the given character is within <code>['0'..'9']</code>.</returns>
+        /// <returns>Whether the given character is within <c>['0'..'9']</c>.</returns>
         public static bool IsDigit(this char c)
             => c >= '0' && c <= '9';
 
@@ -24,7 +24,7 @@ namespace Basilisk.Core
         /// Tests whether the given characters are all digits.
         /// </summary>
         /// <param name="chars">The characters to test.</param>
-        /// <returns>Whether the given characters are all within <code>['0'..'9']</code>.</returns>
+        /// <returns>Whether the given characters are all within <c>['0'..'9']</c>.</returns>
         public static bool IsDigits(this IEnumerable<char> chars)
             => chars.All(c => c.IsDigit());
 
@@ -38,7 +38,7 @@ namespace Basilisk.Core
             => string.Join(separator, strings);
 
         /// <summary>
-        /// Uses the given string as format for a call to <code>string.Format</code>.
+        /// Uses the given string as format for a call to <c>string.Format</c>.
         /// </summary>
         /// <param name="format">The format.</param>
         /// <param name="args">Optional arguments.</param>
@@ -47,7 +47,7 @@ namespace Basilisk.Core
             => string.Format(format, args);
 
         /// <summary>
-        /// Uses the given string and forma provider for a call to <code>string.Format</code>.
+        /// Uses the given string and forma provider for a call to <c>string.Format</c>.
         /// </summary>
         /// <param name="format">The format.</param>
         /// <param name="formatProvider">The format provider.</param>
@@ -102,7 +102,7 @@ namespace Basilisk.Core
         }
 
         /// <summary>
-        /// Converts the given text to a <code>XmlDocument</code>
+        /// Converts the given text to a <c>XmlDocument</c>
         /// </summary>
         /// <param name="xml">the XML text</param>
         /// <returns>The XmlDocument</returns>

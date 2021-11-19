@@ -4,7 +4,7 @@ using System.Xml;
 namespace Basilisk.Logo
 {
     /// <summary>
-    /// Program class encapsulating <code>Main</code>.
+    /// Program class encapsulating <c>Main</c>.
     /// </summary>
     public static class Program
     {

@@ -21,7 +21,7 @@ namespace Basilisk.Graphics.SVG.Builder
         }
 
         /// <summary>
-        /// Begins a <code>path</code> element.
+        /// Begins a <c>path</c> element.
         /// </summary>
         /// <returns>A path builder linked to this builder.</returns>
         public PathBuilder BeginPath()

@@ -24,7 +24,7 @@ namespace Basilisk.Core
             => exception.InnerException?.InnerMost() ?? exception;
 
         /// <summary>
-        /// Creates a <code>NotImplementedException</code> for the calling method.
+        /// Creates a <c>NotImplementedException</c> for the calling method.
         /// </summary>
         /// <returns>New instance mentioning the calling method.</returns>
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -32,7 +32,7 @@ namespace Basilisk.Core
             => new(new StackFrame(1, true).ToString());
 
         /// <summary>
-        /// Creates a <code>NotSupportedException</code> for the calling method.
+        /// Creates a <c>NotSupportedException</c> for the calling method.
         /// </summary>
         /// <returns>New instance mentioning the calling method.</returns>
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -40,14 +40,14 @@ namespace Basilisk.Core
             => new(new StackFrame(1, true).ToString());
 
         /// <summary>
-        /// Creates a <code>PlatformNotSupportedException</code>.
+        /// Creates a <c>PlatformNotSupportedException</c>.
         /// </summary>
         /// <returns>New instance mentioning the current platform.</returns>
         public static PlatformNotSupportedException PlatformNotSupported()
             => new(RuntimeInformation.OSDescription);
 
         /// <summary>
-        /// Creates a <code>ObjectDisposedException</code>.
+        /// Creates a <c>ObjectDisposedException</c>.
         /// </summary>
         /// <param name="name">The name of the object that has been disposed.</param>
         /// <returns>New instance, optionally mentioning the name of the disposed object.</returns>
@@ -55,7 +55,7 @@ namespace Basilisk.Core
             => new(name);
 
         /// <summary>
-        /// Creates a <code>FileNotFoundException</code>.
+        /// Creates a <c>FileNotFoundException</c>.
         /// </summary>
         /// <param name="path">Path to the file that was not found.</param>
         /// <returns>New instance mentioning the file that was not found.</returns>
@@ -63,7 +63,7 @@ namespace Basilisk.Core
             => new(null, path);
 
         /// <summary>
-        /// Creates a <code>FileNotFoundException</code>.
+        /// Creates a <c>FileNotFoundException</c>.
         /// </summary>
         /// <param name="file">The file that was not found.</param>
         /// <returns>New instance mentioning the file that was not found.</returns>
@@ -71,7 +71,7 @@ namespace Basilisk.Core
             => new(null, file.FullName);
 
         /// <summary>
-        /// Creates a <code>DirectoryNotFoundException</code>.
+        /// Creates a <c>DirectoryNotFoundException</c>.
         /// </summary>
         /// <param name="path">Path to directory that was not found.</param>
         /// <returns>New instance mentioning the directory that was not found.</returns>
@@ -79,7 +79,7 @@ namespace Basilisk.Core
             => new(path);
 
         /// <summary>
-        /// Creates a <code>DirectoryNotFoundException</code>.
+        /// Creates a <c>DirectoryNotFoundException</c>.
         /// </summary>
         /// <param name="directory">The directory that was not found.</param>
         /// <returns>New instance mentioning the directory that was not found.</returns>
@@ -87,7 +87,7 @@ namespace Basilisk.Core
             => new(directory.FullName);
 
         /// <summary>
-        /// Creates an <code>IOException</code>.
+        /// Creates an <c>IOException</c>.
         /// </summary>
         /// <param name="message">Message to display.</param>
         /// <param name="path">Path to file with bad format.</param>
@@ -96,7 +96,7 @@ namespace Basilisk.Core
             => new(BadFileFormatFormat.Format(message, path));
 
         /// <summary>
-        /// Creates an <code>IOException</code>.
+        /// Creates an <c>IOException</c>.
         /// </summary>
         /// <param name="message">Message to display.</param>
         /// <param name="file">File with bad format.</param>
@@ -105,7 +105,7 @@ namespace Basilisk.Core
             => new(BadFileFormatFormat.Format(message, file.FullName));
 
         /// <summary>
-        /// Creates an <code>ArgumentException</code>.
+        /// Creates an <c>ArgumentException</c>.
         /// </summary>
         /// <param name="paramName">Name of the erronous parameter.</param>
         /// <param name="message">Additional message.</param>
@@ -114,7 +114,7 @@ namespace Basilisk.Core
             => new(message, paramName);
 
         /// <summary>
-        /// Creates an <code>ArgumentOutOfRangeException</code>.
+        /// Creates an <c>ArgumentOutOfRangeException</c>.
         /// </summary>
         /// <param name="paramName">Name of the erronous parameter.</param>
         /// <param name="actualValue">Actual value of the parameter.</param>
@@ -124,7 +124,7 @@ namespace Basilisk.Core
             => new(paramName, actualValue, message);
 
         /// <summary>
-        /// Creates an <code>ApplicationException</code> with the given message.
+        /// Creates an <c>ApplicationException</c> with the given message.
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
@@ -132,7 +132,7 @@ namespace Basilisk.Core
             => new(InvalidStateFormat.Format(message));
 
         /// <summary>
-        /// Creates an <code>ApplicationException</code> denoting an execution failure.
+        /// Creates an <c>ApplicationException</c> denoting an execution failure.
         /// </summary>
         /// <param name="exitCode">Exit code of failing execution.</param>
         /// <param name="errors">Errors.</param>
@@ -141,7 +141,7 @@ namespace Basilisk.Core
             => new(ExecutionFailedFormat.Format(exitCode, NewLine, errors.Join(NewLine)));
 
         /// <summary>
-        /// Creates an <code>ApplicationException</code> denoting an execution failure.
+        /// Creates an <c>ApplicationException</c> denoting an execution failure.
         /// </summary>
         /// <param name="exitCode">Exit code of failing execution.</param>
         /// <param name="errors">Errors.</param>

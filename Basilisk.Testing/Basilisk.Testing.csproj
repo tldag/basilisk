@@ -7,4 +7,8 @@
     <Description>Basilisk Test Library</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="$(BasiliskReflectionProject)" />
+  </ItemGroup>
+
 </Project>

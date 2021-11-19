@@ -63,7 +63,7 @@ namespace Basilisk.IO
         /// <typeparam name="T">XML serializable type.</typeparam>
         /// <param name="obj">The object to serialize.</param>
         /// <param name="file">The file to create.</param>
-        /// <param name="settings">Optional settings. Default settings are used, if <code>null</code>.</param>
+        /// <param name="settings">Optional settings. Default settings are used, if <c>null</c>.</param>
         public static void SerializeXml<T>(this T obj, FileInfo file, XmlWriterSettings? settings = null)
             where T : class
         {
@@ -77,7 +77,7 @@ namespace Basilisk.IO
         /// </summary>
         /// <typeparam name="T">XML serializable type.</typeparam>
         /// <param name="obj">The object to serialize.</param>
-        /// <param name="settings">Optional settings. Default settings are used, if <code>null</code>.</param>
+        /// <param name="settings">Optional settings. Default settings are used, if <c>null</c>.</param>
         /// <returns></returns>
         public static string SerializeXml<T>(this T obj, XmlWriterSettings? settings = null)
             where T : class

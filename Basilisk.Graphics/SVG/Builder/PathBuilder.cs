@@ -3,7 +3,7 @@
 namespace Basilisk.Graphics.SVG.Builder
 {
     /// <summary>
-    /// Builder to create <code>SvgPathElement</code>.
+    /// Builder to create <c>SvgPathElement</c>.
     /// </summary>
     public class PathBuilder
     {

@@ -9,7 +9,7 @@ using System.Linq;
 namespace Basilisk.Tests.Core
 {
     /// <summary>
-    /// Tests for <code>Basilisk.Core.Env</code>.
+    /// Tests for <c>Basilisk.Core.Env</c>.
     /// </summary>
     [TestClass]
     public class EnvTests

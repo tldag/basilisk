@@ -4,12 +4,12 @@ using System.IO;
 namespace Basilisk.Cryptography
 {
     /// <summary>
-    /// Support for <code>.snk</code> files.
+    /// Support for <c>.snk</c> files.
     /// </summary>
     public static class SnkFile
     {
         /// <summary>
-        /// Creates a new <code>.snk</code> file.
+        /// Creates a new <c>.snk</c> file.
         /// </summary>
         /// <param name="file">The file to create.</param>
         public static void CreateSnkFile(FileInfo file)

@@ -16,7 +16,7 @@ namespace Basilisk.Core
         public static bool IsWindows { get; } = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
         /// <summary>
-        /// Shorthand for <code>Environment.GetEnvironmentVariable(key) ?? string.Empty</code>
+        /// Shorthand for <c>Environment.GetEnvironmentVariable(key) ?? string.Empty</c>
         /// </summary>
         /// <param name="variableName">The variable name to search for.</param>
         /// <returns>The value of the environment variable or the empty string if there is no such value.</returns>
@@ -40,7 +40,7 @@ namespace Basilisk.Core
         }
 
         /// <summary>
-        /// Environment variable <code>PATH</code> converted to enumerable. Contains existing directories only.
+        /// Environment variable <c>PATH</c> converted to enumerable. Contains existing directories only.
         /// </summary>
         public static IEnumerable<DirectoryInfo> SearchPath
         {
@@ -57,7 +57,7 @@ namespace Basilisk.Core
         }
 
         /// <summary>
-        /// <code>Program Files</code> directory. Windows only.
+        /// <c>Program Files</c> directory. Windows only.
         /// </summary>
         public static DirectoryInfo ProgramFiles
         {
