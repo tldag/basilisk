@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="$(BasiliskCoreProject)" />
     <ProjectReference Include="$(BasiliskGraphicsProject)" />
+    <ProjectReference Include="$(BasiliskIOProject)" />
     <ProjectReference Include="$(BasiliskReflectionProject)" />
   </ItemGroup>
 

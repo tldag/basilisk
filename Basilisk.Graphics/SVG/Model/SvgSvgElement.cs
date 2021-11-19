@@ -7,15 +7,16 @@ namespace Basilisk.Graphics.SVG.Model
     /// https://www.w3.org/TR/SVG11/struct.html#InterfaceSVGSVGElement
     /// </summary>
     [XmlRoot("svg")]
-    public class SvgSvgElement : ISvgSvgElement
+    public class SvgSvgElement : ISvgSvgElement // TODO: add missing interfaces
     {
-        private static XmlSerializerNamespaces namespaces
-            = new XmlSerializerNamespaces(new[] { new XmlQualifiedName("", "http://www.w3.org/2000/svg") });
+        private static readonly XmlSerializerNamespaces namespaces
+            = new(new[] { new XmlQualifiedName("", "http://www.w3.org/2000/svg") });
 
         /// <summary>
         /// The namespace(s) of this element.
         /// </summary>
         [XmlNamespaceDeclarations]
-        public XmlSerializerNamespaces Namespaces { get => namespaces; }
+        public virtual XmlSerializerNamespaces Namespaces { get => namespaces; }
     }
 }
+ 

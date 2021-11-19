@@ -38,6 +38,18 @@ namespace Basilisk.Reflection
             => new(type, name);
 
         /// <summary>
+        /// Sets the name of the proprty to be found.
+        /// </summary>
+        /// <param name="name">The name</param>
+        /// <returns>This instance.</returns>
+        public PropertyFinder RequireName(string name)
+        {
+            this.name = name;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the required property type.
         /// </summary>
         /// <param name="requiredType">The required property type.</param>

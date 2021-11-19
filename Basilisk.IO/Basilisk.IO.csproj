@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(BasiliskCoreProject)" />
+    <ProjectReference Include="$(BasiliskReflectionProject)" />
   </ItemGroup>
 
   <ItemGroup>

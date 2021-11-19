@@ -1,11 +1,7 @@
 ﻿using Basilisk.Graphics.SVG.Model;
-using Basilisk.Reflection;
+using Basilisk.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Xml.Serialization;
 
 namespace Basilisk.Tests.Graphics.SVG
 {
@@ -19,15 +15,11 @@ namespace Basilisk.Tests.Graphics.SVG
         /// Tests whether the namespaces property exists.
         /// </summary>
         [TestMethod]
-        public void TestNamespaces()
+        public void TestSerialize()
         {
-            List<PropertyInfo> properties = PropertyFinder.Create(typeof(SvgSvgElement))
-                .RequireType(typeof(XmlSerializerNamespaces))
-                .RequireRead()
-                .RequireAttribute(typeof(XmlNamespaceDeclarationsAttribute))
-                .Find().ToList();
+            SvgSvgElement svg = new();
 
-            properties.ForEach(p => { Debug.WriteLine(p); });
+            Debug.WriteLine(svg.SerializeXml());
         }
     }
 }
