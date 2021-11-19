@@ -38,5 +38,19 @@ namespace Basilisk.Tests.Core
             Assert.IsTrue(actuals.Contains(expected));
             Assert.IsTrue(actuals.Count > 1);
         }
+
+        /// <summary>
+        /// Tests the program files directory (Windows only).
+        /// </summary>
+        [TestMethod]
+        public void TestProgramFiles()
+        {
+            if (!Env.IsWindows) return;
+
+            string expected = "C:\\Program Files";
+            string actual = Env.ProgramFiles.FullName;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

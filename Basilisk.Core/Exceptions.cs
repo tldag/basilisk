@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using static Basilisk.Core.Resources.ExceptionResources;
 using static System.Environment;
 
@@ -37,6 +38,13 @@ namespace Basilisk.Core
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static NotSupportedException NotSupported()
             => new(new StackFrame(1, true).ToString());
+
+        /// <summary>
+        /// Creates a <code>PlatformNotSupportedException</code>.
+        /// </summary>
+        /// <returns>New instance mentioning the current platform.</returns>
+        public static PlatformNotSupportedException PlatformNotSupported()
+            => new(RuntimeInformation.OSDescription);
 
         /// <summary>
         /// Creates a <code>ObjectDisposedException</code>.

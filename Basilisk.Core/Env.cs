@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Basilisk.Core
 {
@@ -9,6 +10,11 @@ namespace Basilisk.Core
     /// </summary>
     public static class Env
     {
+        /// <summary>
+        /// Whether the current OS platform is Windows.
+        /// </summary>
+        public static bool IsWindows { get; } = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
         /// <summary>
         /// Shorthand for <code>Environment.GetEnvironmentVariable(key) ?? string.Empty</code>
         /// </summary>
@@ -48,6 +54,14 @@ namespace Basilisk.Core
                         yield return new(entry);
                 }
             }
+        }
+
+        /// <summary>
+        /// <code>Program Files</code> directory. Windows only.
+        /// </summary>
+        public static DirectoryInfo ProgramFiles
+        {
+            get => new(Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
         }
     }
 }
