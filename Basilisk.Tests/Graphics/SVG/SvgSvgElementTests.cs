@@ -17,7 +17,7 @@ namespace Basilisk.Tests.Graphics.SVG
         [TestMethod]
         public void TestSerialize()
         {
-            SvgSvgElement svg = new();
+            Svg svg = new();
 
             Debug.WriteLine(svg.SerializeXml());
         }

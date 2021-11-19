@@ -3,7 +3,7 @@
     /// <summary>
     /// Shape
     /// </summary>
-    public class SvgShapeElement
+    public class Shape
     {
     }
 }

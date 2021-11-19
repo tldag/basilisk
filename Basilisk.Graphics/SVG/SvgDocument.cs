@@ -9,12 +9,22 @@ namespace Basilisk.Graphics.SVG
     /// </summary>
     public class SvgDocument
     {
-        private SvgSvgElement root = new();
+        private Svg root;
 
         /// <summary>
         /// The root if the document
         /// </summary>
-        public SvgSvgElement Root { get { return root; } }
+        public Svg Root { get { return root; } }
+
+        /// <summary>
+        /// Constructs an empty svg document.
+        /// </summary>
+        public SvgDocument() : this(new()) { }
+
+        internal SvgDocument(Svg root)
+        {
+            this.root = root;
+        }
 
         /// <summary>
         /// Loads the SVG from the given file.
@@ -22,7 +32,7 @@ namespace Basilisk.Graphics.SVG
         /// <param name="file">the file to load from</param>
         public void Load(FileInfo file)
         {
-            root = Xml.DeserializeXml<SvgSvgElement>(file);
+            root = Xml.DeserializeXml<Svg>(file);
         }
 
         /// <summary>
@@ -31,7 +41,7 @@ namespace Basilisk.Graphics.SVG
         /// <param name="xml">The XML content.</param>
         public void LoadXml(string xml)
         {
-            root = Xml.DeserializeXml<SvgSvgElement>(xml);
+            root = Xml.DeserializeXml<Svg>(xml);
         }
 
         /// <summary>

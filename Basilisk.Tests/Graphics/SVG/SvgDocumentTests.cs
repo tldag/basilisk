@@ -19,7 +19,7 @@ namespace Basilisk.Tests.Graphics.SVG
         {
             SvgDocument document = new();
 
-            document.Root.Shapes.Add(new SvgPathElement());
+            document.Root.Shapes.Add(new Path());
 
             string xml = document.Save();
 

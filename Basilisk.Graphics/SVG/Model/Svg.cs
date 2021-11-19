@@ -8,7 +8,7 @@ namespace Basilisk.Graphics.SVG.Model
     /// https://www.w3.org/TR/SVG11/struct.html#InterfaceSVGSVGElement
     /// </summary>
     [XmlRoot("svg", Namespace = "http://www.w3.org/2000/svg")]
-    public class SvgSvgElement
+    public class Svg
     {
         private static readonly XmlSerializerNamespaces namespaces
             = new(new[] { new XmlQualifiedName("", "http://www.w3.org/2000/svg") });
@@ -28,8 +28,8 @@ namespace Basilisk.Graphics.SVG.Model
         /// <summary>
         /// The shapes within this svg element.
         /// </summary>
-        [XmlElement("path", typeof(SvgPathElement))]
-        public List<SvgShapeElement> Shapes { get; set; } = new();
+        [XmlElement("path", typeof(Path))]
+        public List<Shape> Shapes { get; set; } = new();
     }
 }
  
