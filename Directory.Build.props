@@ -20,7 +20,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <CoverletCollectorVersion>3.1.0</CoverletCollectorVersion>
     <MicrosoftSourceLinkGitHubVersion>1.1.1</MicrosoftSourceLinkGitHubVersion>
+    <MicrosoftNETTestSdkVersion>16.11.0</MicrosoftNETTestSdkVersion>
+    <MSTestTestAdapterVersion>2.2.7</MSTestTestAdapterVersion>
+    <MSTestTestFrameworkVersion>2.2.7</MSTestTestFrameworkVersion>
   </PropertyGroup>
   
   <!-- Solution Projects -->

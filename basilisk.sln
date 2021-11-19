@@ -15,15 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Core", "Basilisk.Core\Basilisk.Core.csproj", "{14A02965-64C7-4E0B-97A7-21D7E5AE59F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.Graphics", "Basilisk.Graphics\Basilisk.Graphics.csproj", "{717C87BF-48A5-46B1-B576-8FC16B373272}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Graphics", "Basilisk.Graphics\Basilisk.Graphics.csproj", "{717C87BF-48A5-46B1-B576-8FC16B373272}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.IO", "Basilisk.IO\Basilisk.IO.csproj", "{7DFDA46B-4818-4FC9-9C6B-99E5FE70147F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.IO", "Basilisk.IO\Basilisk.IO.csproj", "{7DFDA46B-4818-4FC9-9C6B-99E5FE70147F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.Cryptography", "Basilisk.Cryptography\Basilisk.Cryptography.csproj", "{049FE285-2962-4665-8D4E-09505AF81D63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Cryptography", "Basilisk.Cryptography\Basilisk.Cryptography.csproj", "{049FE285-2962-4665-8D4E-09505AF81D63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.Testing", "Basilisk.Testing\Basilisk.Testing.csproj", "{E8FF9C76-9D08-4684-98BF-5EAD1DB3F4BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Testing", "Basilisk.Testing\Basilisk.Testing.csproj", "{E8FF9C76-9D08-4684-98BF-5EAD1DB3F4BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.Reflection", "Basilisk.Reflection\Basilisk.Reflection.csproj", "{08C53F1E-4F2C-4ADF-B291-3F03AFA63C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Reflection", "Basilisk.Reflection\Basilisk.Reflection.csproj", "{08C53F1E-4F2C-4ADF-B291-3F03AFA63C16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.Tests", "Basilisk.Tests\Basilisk.Tests.csproj", "{92E823C2-2BCF-40EA-9A56-A892E3228487}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{08C53F1E-4F2C-4ADF-B291-3F03AFA63C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08C53F1E-4F2C-4ADF-B291-3F03AFA63C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08C53F1E-4F2C-4ADF-B291-3F03AFA63C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E823C2-2BCF-40EA-9A56-A892E3228487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E823C2-2BCF-40EA-9A56-A892E3228487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E823C2-2BCF-40EA-9A56-A892E3228487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E823C2-2BCF-40EA-9A56-A892E3228487}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
