@@ -30,7 +30,7 @@ namespace Basilisk.IO
         /// </summary>
         /// <typeparam name="T">The type to deserialize.</typeparam>
         /// <param name="file">The file to deserialize.</param>
-        /// <returns>The deerialized object.</returns>
+        /// <returns>The deserialized object.</returns>
         public static T DeserializeXml<T>(this FileInfo file)
             where T : class
         {
@@ -46,7 +46,7 @@ namespace Basilisk.IO
         /// </summary>
         /// <typeparam name="T">The type to deserialize.</typeparam>
         /// <param name="xml">The XML to deserialize.</param>
-        /// <returns>The deerialized object.</returns>
+        /// <returns>The deserialized object.</returns>
         public static T DeserializeXml<T>(this string xml)
             where T : class
         {
@@ -97,7 +97,8 @@ namespace Basilisk.IO
         {
             settings ??= DefaultSettings;
             XmlSerializerNamespaces? namespaces = GetNamespaces(obj);
-            XmlSerializer serializer = new(typeof(T), GetDefaultNamespace(namespaces));
+            Type type = typeof(T);
+            XmlSerializer serializer = new(type, GetDefaultNamespace(type, namespaces));
             using XmlWriter writer = XmlWriter.Create(stream, settings);
 
             serializer.Serialize(writer, obj, namespaces);
@@ -121,8 +122,11 @@ namespace Basilisk.IO
             return null;
         }
 
-        private static string? GetDefaultNamespace(XmlSerializerNamespaces? namespaces)
+        private static string? GetDefaultNamespace(Type type, XmlSerializerNamespaces? namespaces)
         {
+            if (type.GetCustomAttribute<XmlRootAttribute>()?.Namespace is string ns)
+                return ns;
+
             if (namespaces is null)
                 return null;
 
