@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Basilisk Executables Library</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(BasiliskIOProject)" />
+  </ItemGroup>
+
+</Project>

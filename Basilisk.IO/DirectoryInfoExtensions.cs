@@ -23,10 +23,19 @@ namespace Basilisk.IO
         }
 
         /// <summary>
+        /// Uses <c>Path.Combine</c> to create a <c>FileInfo</c> of a file within the given directory.
+        /// </summary>
+        /// <param name="directory">The start directory.</param>
+        /// <param name="parts">The additional paths to pass to <c>Path.Combine</c>.</param>
+        /// <returns>The <c>FileInfo</c>.</returns>
+        public static FileInfo Combine(this DirectoryInfo directory, params string[] parts)
+            => new(CombinePath(directory, parts));
+
+        /// <summary>
         /// Uses <c>Path.Combine</c> to create a sub-<c>DirectoryInfo</c> of the given directory.
         /// </summary>
         /// <param name="directory">The start directory.</param>
-        /// <param name="parts">The additional paths to pass to <c>Path.Combine</c></param>
+        /// <param name="parts">The additional paths to pass to <c>Path.Combine</c>.</param>
         /// <returns>The sub-directory.</returns>
         public static DirectoryInfo CombineDirectory(this DirectoryInfo directory, params string[] parts)
             => new(CombinePath(directory, parts));
