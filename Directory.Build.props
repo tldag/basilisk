@@ -58,7 +58,7 @@
     <PackageProjectUrl>https://github.com/tldag/basilisk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tldag/basilisk.git</RepositoryUrl>
     <PackageReadmeFile>docs/README.md</PackageReadmeFile>
-    <PackageIconUrl>images/basilisk.png</PackageIconUrl>
+    <PackageIcon>images/basilisk.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
