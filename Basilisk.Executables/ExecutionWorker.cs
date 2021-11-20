@@ -86,10 +86,9 @@ namespace Basilisk.Executables
             process.OutputDataReceived += (_, e) => OnOutputDataReceived(e, result);
             process.ErrorDataReceived += (_, e) => OnErrorDataReceived(e, result);
 
+            process.Start();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
-
-            process.Start();
 
             await process.WaitForExitAsync();
 
