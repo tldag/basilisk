@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Basilisk.Executables
 {
@@ -21,5 +24,38 @@ namespace Basilisk.Executables
         /// The collected error output.
         /// </summary>
         public List<string> Errors { get; } = new();
+
+        /// <summary>
+        /// Dumps this result to the <c>Console</c> and to <c>Debug</c>.
+        /// </summary>
+        public void Dump()
+        {
+            Console.WriteLine($"ExitCode: {ExitCode}");
+            Debug.WriteLine($"ExitCode: {ExitCode}");
+
+            if (Errors.Any())
+            {
+                Console.WriteLine("Errors:");
+                Debug.WriteLine("Errors:");
+
+                foreach (string error in Errors)
+                {
+                    Console.WriteLine($"  {error}");
+                    Debug.WriteLine($"  {error}");
+                }
+            }
+
+            if (Outputs.Any())
+            {
+                Console.WriteLine("Output:");
+                Debug.WriteLine("Output:");
+
+                foreach (string output in Outputs)
+                {
+                    Console.WriteLine($"  {output}");
+                    Debug.WriteLine($"  {output}");
+                }
+            }
+        }
     }
 }

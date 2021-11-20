@@ -13,10 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(BasiliskCoreProject)" />
+    <ProjectReference Include="$(BasiliskExecutablesProject)" />
     <ProjectReference Include="$(BasiliskGraphicsProject)" />
-    <ProjectReference Include="$(BasiliskIOProject)" />
     <ProjectReference Include="$(BasiliskReflectionProject)" />
+    <ProjectReference Include="$(BasiliskTestingProject)" />
   </ItemGroup>
 
 </Project>
