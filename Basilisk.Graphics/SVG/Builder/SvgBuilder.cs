@@ -10,6 +10,36 @@ namespace Basilisk.Graphics.SVG.Builder
         private readonly Svg root = new();
 
         /// <summary>
+        /// Creates a new <c>SvgBuilder</c>.
+        /// </summary>
+        /// <returns>The builder.</returns>
+        public static SvgBuilder Create()
+            => new();
+
+        /// <summary>
+        /// Sets the size of the current container.
+        /// </summary>
+        /// <param name="width">Width.</param>
+        /// <param name="height">Height.</param>
+        /// <returns>this</returns>
+        public SvgBuilder Size(string? width, string? height)
+        {
+            root.Width = width;
+            root.Height = height;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the size of the current container.
+        /// </summary>
+        /// <param name="width">Width.</param>
+        /// <param name="height">Height.</param>
+        /// <returns>this</returns>
+        public SvgBuilder Size(int width, int height)
+            => Size(width.ToString(), height.ToString());
+
+        /// <summary>
         /// Adds a shape to the current container.
         /// </summary>
         /// <param name="shape">The shape to add.</param>

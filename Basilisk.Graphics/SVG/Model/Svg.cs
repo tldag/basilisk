@@ -26,6 +26,12 @@ namespace Basilisk.Graphics.SVG.Model
         public string? Width { get; set; }
 
         /// <summary>
+        /// Height.
+        /// </summary>
+        [XmlAttribute("height")]
+        public string? Height { get; set; }
+
+        /// <summary>
         /// The shapes within this svg element.
         /// </summary>
         [XmlElement("path", typeof(Path))]
