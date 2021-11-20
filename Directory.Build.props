@@ -58,10 +58,12 @@
     <PackageProjectUrl>https://github.com/tldag/basilisk</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tldag/basilisk.git</RepositoryUrl>
     <PackageReadmeFile>docs/README.md</PackageReadmeFile>
+    <PackageIconUrl>images/basilisk.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="docs/" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="docs/" Link="Properties/README.md" />
+    <None Include="$(MSBuildThisFileDirectory)basilisk.png" Pack="true" PackagePath="images/" Link="Properties/basilisk.png" />
   </ItemGroup>
 
   <!-- Symbol Package -->
