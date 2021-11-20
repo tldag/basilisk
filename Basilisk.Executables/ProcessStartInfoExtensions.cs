@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Basilisk.Executables
 {
@@ -46,8 +47,8 @@ namespace Basilisk.Executables
 
             if (info.EnvironmentVariables is StringDictionary environmentVariables)
             {
-                foreach (KeyValuePair<string, string?> kvp in environmentVariables)
-                    clone.EnvironmentVariables[kvp.Key] = kvp.Value;
+                foreach (string key in environmentVariables.Keys.OfType<string>())
+                    clone.EnvironmentVariables[key] = environmentVariables[key];
             }
 
             if (Env.IsWindows)
