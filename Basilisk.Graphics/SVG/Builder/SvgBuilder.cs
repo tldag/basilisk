@@ -1,4 +1,4 @@
-﻿using Basilisk.Graphics.SVG.Model;
+﻿using static Basilisk.Graphics.SVG.Model.SvgModel;
 
 namespace Basilisk.Graphics.SVG.Builder
 {

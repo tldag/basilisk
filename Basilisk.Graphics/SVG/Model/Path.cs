@@ -2,15 +2,17 @@
 
 namespace Basilisk.Graphics.SVG.Model
 {
-    /// <summary>
-    /// https://www.w3.org/TR/SVG11/paths.html#InterfaceSVGPathElement
-    /// </summary>
-    public class Path : Shape
+    public static partial class SvgModel
     {
         /// <summary>
-        /// The path data.
+        /// https://www.w3.org/TR/SVG11/paths.html#InterfaceSVGPathElement
         /// </summary>
-        [XmlAttribute("d")]
-        public string D { get; set; } = string.Empty;
+        public class Path : Shape
+        {
+            /// <summary>
+            /// The path data.
+            /// </summary>
+            public string Data { get; set; } = string.Empty;
+        }
     }
 }

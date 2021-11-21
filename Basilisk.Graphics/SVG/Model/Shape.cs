@@ -1,9 +1,12 @@
 ﻿namespace Basilisk.Graphics.SVG.Model
 {
-    /// <summary>
-    /// Shape
-    /// </summary>
-    public class Shape
+    public static partial class SvgModel
     {
+        /// <summary>
+        /// Shape
+        /// </summary>
+        public class Shape
+        {
+        }
     }
 }

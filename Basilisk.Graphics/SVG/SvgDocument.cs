@@ -1,7 +1,9 @@
-﻿using Basilisk.Graphics.SVG.Model;
-using Basilisk.IO;
+﻿using Basilisk.IO;
+using Basilisk.XML;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Xml;
+using static Basilisk.Graphics.SVG.Model.SvgModel;
 
 namespace Basilisk.Graphics.SVG
 {
@@ -10,7 +12,7 @@ namespace Basilisk.Graphics.SVG
     /// </summary>
     public class SvgDocument
     {
-        private Svg root;
+        private readonly Svg root;
 
         /// <summary>
         /// The root if the document
@@ -28,43 +30,32 @@ namespace Basilisk.Graphics.SVG
         }
 
         /// <summary>
-        /// Loads the SVG from the given file.
-        /// </summary>
-        /// <param name="file">the file to load from</param>
-        [RequiresUnreferencedCode("")]
-        public void Load(FileInfo file)
-        {
-            root = Xml.DeserializeXml<Svg>(file);
-        }
-
-        /// <summary>
-        /// Loads the SVG from the given XML content.
-        /// </summary>
-        /// <param name="xml">The XML content.</param>
-        [RequiresUnreferencedCode("")]
-        public void LoadXml(string xml)
-        {
-            root = Xml.DeserializeXml<Svg>(xml);
-        }
-
-        /// <summary>
         /// Saves the document to the given file.
         /// </summary>
         /// <param name="file">The file to save to.</param>
-        [RequiresUnreferencedCode("")]
-        public void Save(FileInfo file)
+        /// <param name="settings">Writer settings to use.</param>
+        public void Save(FileInfo file, XmlWriterSettings? settings = null)
         {
-            Xml.SerializeXml(root, file);
+            using FileStream stream = file.OpenWrite();
+            using XmlWriter writer = stream.CreateXmlWriter(settings);
+
+            SvgWriter.Create(writer).Write(root);
         }
 
         /// <summary>
         /// Saves the document into an XML content.
         /// </summary>
         /// <returns></returns>
-        [RequiresUnreferencedCode("")]
-        public string Save()
+        public string Save(XmlWriterSettings? settings = null)
         {
-            return Xml.SerializeXml(root);
+            settings ??= Xml.IndentedSettings;
+
+            using MemoryStream stream = new();
+            using XmlWriter writer = stream.CreateXmlWriter(settings);
+
+            SvgWriter.Create(writer).Write(root);
+
+            return new(stream.AsString(settings.Encoding));
         }
     }
 }

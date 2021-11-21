@@ -9,6 +9,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PublishTrimmed>true</PublishTrimmed>
+    <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
   
   <!-- Versions -->
@@ -39,6 +40,7 @@
     <BasiliskIOProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.IO', 'Basilisk.IO.csproj' ))</BasiliskIOProject>
     <BasiliskReflectionProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Reflection', 'Basilisk.Reflection.csproj' ))</BasiliskReflectionProject>
     <BasiliskTestingProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Testing', 'Basilisk.Testing.csproj' ))</BasiliskTestingProject>
+    <BasiliskXMLProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.XML', 'Basilisk.XML.csproj' ))</BasiliskXMLProject>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(SolutionFileName)' != ''">

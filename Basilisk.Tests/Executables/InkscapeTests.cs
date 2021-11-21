@@ -19,7 +19,6 @@ namespace Basilisk.Tests.Executables
         /// Test
         /// </summary>
         [TestMethod]
-        [RequiresUnreferencedCode("")]
         public void Test()
         {
             FileInfo svgFile = TestDirectory.Combine("basilisk.svg");

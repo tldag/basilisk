@@ -1,6 +1,9 @@
 
 Set-Location $PSScriptRoot
 
+Get-ChildItem -Path "." -Filter "TestOutput" -ErrorAction Ignore | ForEach-Object { Remove-Item $_ -Recurse }
+Get-ChildItem -Path "." -Filter "TestResults" -ErrorAction Ignore | ForEach-Object { Remove-Item $_ -Recurse }
+
 $projects = Get-ChildItem -Path "." -Filter "*.csproj" -Recurse
 
 $projects | ForEach-Object {

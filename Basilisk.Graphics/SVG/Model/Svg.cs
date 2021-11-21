@@ -1,41 +1,31 @@
 ﻿using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Basilisk.Graphics.SVG.Model
 {
     /// <summary>
-    /// https://www.w3.org/TR/SVG11/struct.html#InterfaceSVGSVGElement
+    /// SVG Model.
     /// </summary>
-    [XmlRoot("svg", Namespace = "http://www.w3.org/2000/svg")]
-    public class Svg
+    public static partial class SvgModel
     {
-        private static readonly XmlSerializerNamespaces namespaces
-            = new(new[] { new XmlQualifiedName("", "http://www.w3.org/2000/svg") });
-
         /// <summary>
-        /// The namespace(s) of this element.
+        /// https://www.w3.org/TR/SVG11/struct.html#InterfaceSVGSVGElement
         /// </summary>
-        [XmlNamespaceDeclarations]
-        public virtual XmlSerializerNamespaces Namespaces { get => namespaces; }
+        public class Svg
+        {
+            /// <summary>
+            /// Width.
+            /// </summary>
+            public string? Width { get; set; }
 
-        /// <summary>
-        /// Width.
-        /// </summary>
-        [XmlAttribute("width")]
-        public string? Width { get; set; }
+            /// <summary>
+            /// Height.
+            /// </summary>
+            public string? Height { get; set; }
 
-        /// <summary>
-        /// Height.
-        /// </summary>
-        [XmlAttribute("height")]
-        public string? Height { get; set; }
-
-        /// <summary>
-        /// The shapes within this svg element.
-        /// </summary>
-        [XmlElement("path", typeof(Path))]
-        public List<Shape> Shapes { get; set; } = new();
+            /// <summary>
+            /// The shapes within this svg element.
+            /// </summary>
+            public List<Shape> Shapes { get; set; } = new();
+        }
     }
 }
- 

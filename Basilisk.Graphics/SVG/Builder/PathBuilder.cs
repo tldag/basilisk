@@ -1,4 +1,4 @@
-﻿using Basilisk.Graphics.SVG.Model;
+﻿using static Basilisk.Graphics.SVG.Model.SvgModel;
 
 namespace Basilisk.Graphics.SVG.Builder
 {
@@ -21,7 +21,7 @@ namespace Basilisk.Graphics.SVG.Builder
 
         private PathBuilder Add(string step)
         {
-            path.D += step;
+            path.Data += step;
             return this;
         }
 
