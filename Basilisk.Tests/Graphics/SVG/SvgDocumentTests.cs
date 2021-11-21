@@ -2,6 +2,7 @@
 using Basilisk.Graphics.SVG.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Basilisk.Tests.Graphics.SVG
 {
@@ -15,6 +16,7 @@ namespace Basilisk.Tests.Graphics.SVG
         /// TestSaveLoad
         /// </summary>
         [TestMethod]
+        [RequiresUnreferencedCode("")]
         public void TestSaveLoad()
         {
             SvgDocument document = new();

@@ -1,6 +1,7 @@
 ﻿using Basilisk.Core;
 using Basilisk.Reflection;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -31,6 +32,7 @@ namespace Basilisk.IO
         /// <typeparam name="T">The type to deserialize.</typeparam>
         /// <param name="file">The file to deserialize.</param>
         /// <returns>The deserialized object.</returns>
+        [RequiresUnreferencedCode("")]
         public static T DeserializeXml<T>(this FileInfo file)
             where T : class
         {
@@ -47,6 +49,7 @@ namespace Basilisk.IO
         /// <typeparam name="T">The type to deserialize.</typeparam>
         /// <param name="xml">The XML to deserialize.</param>
         /// <returns>The deserialized object.</returns>
+        [RequiresUnreferencedCode("")]
         public static T DeserializeXml<T>(this string xml)
             where T : class
         {
@@ -64,6 +67,7 @@ namespace Basilisk.IO
         /// <param name="obj">The object to serialize.</param>
         /// <param name="file">The file to create.</param>
         /// <param name="settings">Optional settings. Default settings are used, if <c>null</c>.</param>
+        [RequiresUnreferencedCode("")]
         public static void SerializeXml<T>(this T obj, FileInfo file, XmlWriterSettings? settings = null)
             where T : class
         {
@@ -79,6 +83,7 @@ namespace Basilisk.IO
         /// <param name="obj">The object to serialize.</param>
         /// <param name="settings">Optional settings. Default settings are used, if <c>null</c>.</param>
         /// <returns></returns>
+        [RequiresUnreferencedCode("")]
         public static string SerializeXml<T>(this T obj, XmlWriterSettings? settings = null)
             where T : class
         {
@@ -92,6 +97,7 @@ namespace Basilisk.IO
             return reader.ReadToEnd();
         }
 
+        [RequiresUnreferencedCode("")]
         private static XmlWriterSettings SerializeXml<T>(T obj, Stream stream, XmlWriterSettings? settings = null)
             where T : class
         {

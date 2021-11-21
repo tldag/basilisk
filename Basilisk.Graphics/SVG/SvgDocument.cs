@@ -1,5 +1,6 @@
 ﻿using Basilisk.Graphics.SVG.Model;
 using Basilisk.IO;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace Basilisk.Graphics.SVG
@@ -30,6 +31,7 @@ namespace Basilisk.Graphics.SVG
         /// Loads the SVG from the given file.
         /// </summary>
         /// <param name="file">the file to load from</param>
+        [RequiresUnreferencedCode("")]
         public void Load(FileInfo file)
         {
             root = Xml.DeserializeXml<Svg>(file);
@@ -39,6 +41,7 @@ namespace Basilisk.Graphics.SVG
         /// Loads the SVG from the given XML content.
         /// </summary>
         /// <param name="xml">The XML content.</param>
+        [RequiresUnreferencedCode("")]
         public void LoadXml(string xml)
         {
             root = Xml.DeserializeXml<Svg>(xml);
@@ -48,6 +51,7 @@ namespace Basilisk.Graphics.SVG
         /// Saves the document to the given file.
         /// </summary>
         /// <param name="file">The file to save to.</param>
+        [RequiresUnreferencedCode("")]
         public void Save(FileInfo file)
         {
             Xml.SerializeXml(root, file);
@@ -57,6 +61,7 @@ namespace Basilisk.Graphics.SVG
         /// Saves the document into an XML content.
         /// </summary>
         /// <returns></returns>
+        [RequiresUnreferencedCode("")]
         public string Save()
         {
             return Xml.SerializeXml(root);

@@ -8,6 +8,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
   
   <!-- Versions -->

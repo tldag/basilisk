@@ -1,5 +1,6 @@
 ﻿using Basilisk.Graphics.SVG;
 using Basilisk.Graphics.SVG.Builder;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace Basilisk.Tests
@@ -25,6 +26,7 @@ namespace Basilisk.Tests
                 .Build();
         }
 
+        [RequiresUnreferencedCode("")]
         internal static FileInfo Create(FileInfo file)
         {
             Create().Save(file);

@@ -2,6 +2,7 @@
 using Basilisk.IO;
 using Basilisk.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace Basilisk.Tests.Executables
@@ -18,6 +19,7 @@ namespace Basilisk.Tests.Executables
         /// Test
         /// </summary>
         [TestMethod]
+        [RequiresUnreferencedCode("")]
         public void Test()
         {
             FileInfo svgFile = TestDirectory.Combine("basilisk.svg");

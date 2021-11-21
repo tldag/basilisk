@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="6.0.0" />
+    <ProjectReference Include="$(BasiliskCoreProject)" />
+  </ItemGroup>
+  
+  <Target Name="UnpublishBeforeClean" BeforeTargets="Clean;Rebuild" Condition="'$(TargetFramework)' != '' AND '$(Configuration)' == 'Release'">
+    <PropertyGroup>
+      <_UnpublishBeforeCleanDir>$([MSBuild]::NormalizeDirectory( $(MSBuildThisFileDirectory), '$(OutDir)', 'publish' ))</_UnpublishBeforeCleanDir>
+    </PropertyGroup>
+    <RemoveDir Directories="$(_UnpublishBeforeCleanDir)" />
+  </Target>
+
+  <Target Name="PublishAfterBuild" AfterTargets="Build" Condition="'$(TargetFramework)' != '' AND '$(Configuration)' == 'Release'"
+          DependsOnTargets="UnpublishBeforeClean">
+    <Exec Command="dotnet publish -f $(TargetFramework) -c $(Configuration) --no-build --nologo $(MSBuildThisFileFullPath)" />
+  </Target>
+
+</Project>
