@@ -15,6 +15,11 @@ namespace Basilisk.Testing
     /// </summary>
     public class TestsBase
     {
+        /// <summary>
+        /// Whether the test runs on the CI server.
+        /// </summary>
+        public virtual bool IsCI { get => "true".Equals(Env.GetEnvironmentVariable("CI").ToLowerInvariant()); }
+
         private string? solutionFileName = null;
 
         /// <summary>
