@@ -23,6 +23,9 @@
 
   <PropertyGroup>
     <CoverletCollectorVersion>3.1.0</CoverletCollectorVersion>
+    <MicrosoftExtensionsHostingVersion>6.0.0</MicrosoftExtensionsHostingVersion>
+    <MicrosoftExtensionsHostingSystemdVersion>6.0.0</MicrosoftExtensionsHostingSystemdVersion>
+    <MicrosoftExtensionsHostingWindowsServicesVersion>6.0.0</MicrosoftExtensionsHostingWindowsServicesVersion>
     <MicrosoftSourceLinkGitHubVersion>1.1.1</MicrosoftSourceLinkGitHubVersion>
     <MicrosoftNETTestSdkVersion>16.11.0</MicrosoftNETTestSdkVersion>
     <MSTestTestAdapterVersion>2.2.7</MSTestTestAdapterVersion>
