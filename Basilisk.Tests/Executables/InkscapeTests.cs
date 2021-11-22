@@ -2,7 +2,6 @@
 using Basilisk.IO;
 using Basilisk.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 namespace Basilisk.Tests.Executables

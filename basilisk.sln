@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Collections", "Bas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Gallery", "Basilisk.Gallery\Basilisk.Gallery.csproj", "{99C54342-83AD-4F6C-9953-B54C7A76CE1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.XML", "Basilisk.XML\Basilisk.XML.csproj", "{D7935378-6E01-4E44-9BA9-256E699A6867}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.XML", "Basilisk.XML\Basilisk.XML.csproj", "{D7935378-6E01-4E44-9BA9-256E699A6867}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.Extensions", "Basilisk.Extensions\Basilisk.Extensions.csproj", "{051019FC-8533-435A-B83C-801DAEB7F88C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +131,14 @@ Global
 		{D7935378-6E01-4E44-9BA9-256E699A6867}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7935378-6E01-4E44-9BA9-256E699A6867}.Release|x64.ActiveCfg = Release|Any CPU
 		{D7935378-6E01-4E44-9BA9-256E699A6867}.Release|x64.Build.0 = Release|Any CPU
+		{051019FC-8533-435A-B83C-801DAEB7F88C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051019FC-8533-435A-B83C-801DAEB7F88C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{051019FC-8533-435A-B83C-801DAEB7F88C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{051019FC-8533-435A-B83C-801DAEB7F88C}.Debug|x64.Build.0 = Debug|Any CPU
+		{051019FC-8533-435A-B83C-801DAEB7F88C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051019FC-8533-435A-B83C-801DAEB7F88C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{051019FC-8533-435A-B83C-801DAEB7F88C}.Release|x64.ActiveCfg = Release|Any CPU
+		{051019FC-8533-435A-B83C-801DAEB7F88C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
