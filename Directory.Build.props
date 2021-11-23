@@ -30,6 +30,7 @@
     <MicrosoftNETTestSdkVersion>16.11.0</MicrosoftNETTestSdkVersion>
     <MSTestTestAdapterVersion>2.2.7</MSTestTestAdapterVersion>
     <MSTestTestFrameworkVersion>2.2.7</MSTestTestFrameworkVersion>
+    <NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
   </PropertyGroup>
   
   <!-- Solution Projects -->
