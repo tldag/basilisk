@@ -24,6 +24,7 @@
   <PropertyGroup>
     <AutofacExtensionsDependencyInjectionVersion>7.2.0</AutofacExtensionsDependencyInjectionVersion>
     <CoverletCollectorVersion>3.1.0</CoverletCollectorVersion>
+    <MicrosoftCodeAnalysisCommonVersion>4.1.0-1.final</MicrosoftCodeAnalysisCommonVersion>
     <MicrosoftExtensionsHostingVersion>6.0.0</MicrosoftExtensionsHostingVersion>
     <MicrosoftExtensionsHostingAbstractionsVersion>6.0.0</MicrosoftExtensionsHostingAbstractionsVersion>
     <MicrosoftExtensionsHostingSystemdVersion>6.0.0</MicrosoftExtensionsHostingSystemdVersion>

@@ -17,7 +17,7 @@ namespace Basilisk.Extensions
         /// Builds the injection host.
         /// </summary>
         /// <returns></returns>
-        public IHost Build()
+        public virtual IHost Build()
         {
             HostBuilder builder = new();
 

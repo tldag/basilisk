@@ -4,6 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Reflection;
+using Autofac.Builder;
+using Autofac.Core;
 
 namespace Basilisk.Injection
 {
@@ -58,6 +62,14 @@ namespace Basilisk.Injection
         protected virtual IEnumerable<ServiceDescriptor> GetHostedServices()
         {
             return this.Where(sd => sd.ServiceType.IsAssignableTo<IHostedService>());
+        }
+
+        /// <summary>
+        /// Populates the builder with the services.
+        /// </summary>
+        protected virtual void Populate()
+        {
+            ServicePopulator.Create(Builder).Populate(this);
         }
     }
 }

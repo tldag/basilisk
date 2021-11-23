@@ -39,7 +39,7 @@ namespace Basilisk.Tests.Core
         [TestMethod]
         public void Test()
         {
-            AppSettings appSettings = new AppSettings();
+            AppSettings appSettings = new();
 
             appSettings.TestConfig.Port = 81;
 

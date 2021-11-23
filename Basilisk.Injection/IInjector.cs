@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Autofac;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 
 namespace Basilisk.Injection
@@ -6,7 +8,7 @@ namespace Basilisk.Injection
     /// <summary>
     /// Injector interface.
     /// </summary>
-    public interface IInjector : IServiceProvider, ISupportRequiredService, IServiceProviderIsService
+    public interface IInjector : IContainer, IServiceProvider, ISupportRequiredService, IServiceProviderIsService, IHost
     {
     }
 }
