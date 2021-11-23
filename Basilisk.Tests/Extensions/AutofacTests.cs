@@ -137,13 +137,15 @@ namespace Basilisk.Tests.Extensions
             builder.Populate(services);
 
             using IContainer container = builder.Build();
-            using AutofacServiceProvider provider = new(container);
             ITestData testData = container.Resolve<ITestData>();
-            IFooService fooService = provider.GetRequiredService<IFooService>();
-            IBarService barService = provider.GetRequiredService<IBarService>();
+            IFooService fooService = container.Resolve<IFooService>();
+            IFooService fooService2 = container.Resolve<IFooService>();
+            IBarService barService = container.Resolve<IBarService>();
 
             Assert.IsNotNull(fooService);
             Assert.IsNotNull(barService);
+
+            Assert.IsTrue(ReferenceEquals(fooService, fooService2));
 
             using CancellationTokenSource cts = new();
             CancellationToken token = cts.Token;
