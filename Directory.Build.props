@@ -22,6 +22,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <AutofacExtensionsDependencyInjectionVersion>7.2.0</AutofacExtensionsDependencyInjectionVersion>
     <CoverletCollectorVersion>3.1.0</CoverletCollectorVersion>
     <MicrosoftExtensionsHostingVersion>6.0.0</MicrosoftExtensionsHostingVersion>
     <MicrosoftExtensionsHostingSystemdVersion>6.0.0</MicrosoftExtensionsHostingSystemdVersion>
