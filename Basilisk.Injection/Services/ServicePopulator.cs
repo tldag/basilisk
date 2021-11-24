@@ -5,12 +5,9 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Basilisk.Injection
+namespace Basilisk.Injection.Services
 {
     /// <summary>
     /// ServicePopulator
@@ -37,7 +34,7 @@ namespace Basilisk.Injection
         /// <param name="builder">The builder.</param>
         /// <returns>The populator.</returns>
         public static ServicePopulator Create(ContainerBuilder builder)
-            => new ServicePopulator(builder);
+            => new(builder);
 
         /// <summary>
         /// Populates the builder with service provider, service scope factory and the givev services.
@@ -132,7 +129,7 @@ namespace Basilisk.Injection
             if (descriptor.ImplementationFactory is null)
                 return;
 
-            Func<IComponentContext, IEnumerable<Parameter>, object> factory = (context, _)
+            object factory(IComponentContext context, IEnumerable<Parameter> _)
                 => descriptor.ImplementationFactory(context.Resolve<IServiceProvider>());
 
             IComponentRegistration registration = ConfigureLifecycle(

@@ -8,6 +8,8 @@ using System;
 using System.Reflection;
 using Autofac.Builder;
 using Autofac.Core;
+using Basilisk.Injection.Services;
+using Basilisk.Injection.Inject;
 
 namespace Basilisk.Injection
 {

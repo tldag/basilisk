@@ -11,7 +11,8 @@ using Autofac.Core.Lifetime;
 using Autofac.Core.Resolving;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Basilisk.Injection
+namespace Basilisk.Injection.Inject
+
 {
     /// <summary>
     /// Injector

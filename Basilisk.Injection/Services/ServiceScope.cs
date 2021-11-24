@@ -3,7 +3,7 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace Basilisk.Injection
+namespace Basilisk.Injection.Services
 {
     /// <summary>
     /// ServiceScope. Modeled after internal <c>AutofacServiceScope</c>.

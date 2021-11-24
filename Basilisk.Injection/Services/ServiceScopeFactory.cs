@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Basilisk.Injection
+namespace Basilisk.Injection.Services
 {
     /// <summary>
     /// ServiceScopeFactory. Modeled after internal class <c>AutofacServiceScopeFactory</c>.
