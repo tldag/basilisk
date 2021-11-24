@@ -28,5 +28,12 @@ namespace Basilisk.Injection
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task StopAsync(CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Waits for the <see cref="BackgroundService"/>s to terminate.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task WaitAsync(CancellationToken cancellationToken);
     }
 }

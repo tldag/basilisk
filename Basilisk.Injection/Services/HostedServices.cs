@@ -12,26 +12,26 @@ namespace Basilisk.Injection.Services
     /// </summary>
     public class HostedServices : IHostedServices
     {
-        private readonly List<IHostedService> hostedServices;
+        private readonly List<IHostedService> services;
 
         /// <inheritdoc/>
-        public IEnumerable<IHostedService> Services => hostedServices;
+        public IEnumerable<IHostedService> Services => services;
 
         /// <summary>
         /// C'tor
         /// </summary>
-        /// <param name="hostedServices"></param>
-        public HostedServices(IEnumerable<IHostedService> hostedServices)
+        /// <param name="services"></param>
+        public HostedServices(IEnumerable<IHostedService> services)
         {
-            this.hostedServices = new(hostedServices);
+            this.services = new(services);
         }
 
         /// <inheritdoc/>
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            foreach (IHostedService hostedService in hostedServices)
+            foreach (IHostedService service in services)
             {
-                await hostedService.StartAsync(cancellationToken).ConfigureAwait(false);
+                await service.StartAsync(cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -40,11 +40,11 @@ namespace Basilisk.Injection.Services
         {
             List<Exception> exceptions = new();
 
-            foreach (IHostedService hostedService in hostedServices.AsEnumerable().Reverse())
+            foreach (IHostedService service in services.AsEnumerable().Reverse())
             {
                 try
                 {
-                    await hostedService.StopAsync(cancellationToken).ConfigureAwait(false);
+                    await service.StopAsync(cancellationToken).ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
@@ -55,6 +55,20 @@ namespace Basilisk.Injection.Services
             if (exceptions.Count > 0)
             {
                 throw new AggregateException(exceptions);
+            }
+        }
+
+        /// <inheritdoc/>
+        public async Task WaitAsync(CancellationToken cancellationToken)
+        {
+            foreach (BackgroundService service in services.OfType<BackgroundService>())
+            {
+                Task task = service.ExecuteTask;
+
+                if (task is not null)
+                {
+                    await task.ConfigureAwait(false);
+                }
             }
         }
     }

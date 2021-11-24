@@ -27,6 +27,9 @@ namespace Basilisk.Tests.Injection
 
             /// <summary />
             public int Service2Stopped;
+
+            /// <summary />
+            public int Service2Executed;
         }
 
         /// <summary />
@@ -53,7 +56,7 @@ namespace Basilisk.Tests.Injection
         }
 
         /// <summary />
-        public class Service2 : IHostedService
+        public class Service2 : BackgroundService
         {
             private readonly Data data;
 
@@ -61,17 +64,24 @@ namespace Basilisk.Tests.Injection
             public Service2(Data data) { this.data = data; }
 
             /// <inheritdoc/>
-            public async Task StartAsync(CancellationToken cancellationToken)
+            public override async Task StartAsync(CancellationToken cancellationToken)
             {
                 ++data.Service2Started;
-                await Task.CompletedTask;
+                await base.StartAsync(cancellationToken);
             }
 
             /// <inheritdoc/>
-            public async Task StopAsync(CancellationToken cancellationToken)
+            public override async Task StopAsync(CancellationToken cancellationToken)
             {
+                await base.StopAsync(cancellationToken);
                 ++data.Service2Stopped;
-                await Task.CompletedTask;
+            }
+
+            /// <inheritdoc/>
+            protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+            {
+                ++data.Service2Executed;
+                await Task.Delay(20, stoppingToken);
             }
         }
 
@@ -81,21 +91,25 @@ namespace Basilisk.Tests.Injection
         [TestMethod]
         public void Test()
         {
-            Data data = new Data();
+            Data data = new();
 
             IInjector injector = InjectorBuilder.Create()
                 .AddInstance(data)
                 .AddHostedService<Service1>()
                 .AddHostedService<Service2>()
                 .Build();
-            
-            injector.StartAsync().Wait();
-            injector.StopAsync().Wait();
+
+            IHostedServices hostedServices = injector.Resolve<IHostedServices>();
+
+            hostedServices.StartAsync(default).Wait();
+            hostedServices.WaitAsync(default).Wait();
+            hostedServices.StopAsync(default).Wait();
 
             Assert.AreEqual(1, data.Service1Started);
             Assert.AreEqual(1, data.Service1Stopped);
             Assert.AreEqual(1, data.Service2Started);
             Assert.AreEqual(1, data.Service2Stopped);
+            Assert.AreEqual(1, data.Service2Executed);
         }
     }
 }
