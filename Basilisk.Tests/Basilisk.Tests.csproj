@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(BasiliskExecutablesProject)" />
-    <ProjectReference Include="$(BasiliskExtensionsProject)" />
     <ProjectReference Include="$(BasiliskGraphicsProject)" />
     <ProjectReference Include="$(BasiliskReflectionProject)" />
     <ProjectReference Include="$(BasiliskTestingProject)" />
