@@ -11,25 +11,27 @@ namespace Basilisk.Injection.Services
         /// <summary>
         /// Configures the lifetime for the service component under construction.
         /// </summary>
+        /// <typeparam name="TLimit"></typeparam>
         /// <typeparam name="TActivatorData"></typeparam>
         /// <typeparam name="TRegistrationStyle"></typeparam>
         /// <param name="registrationBuilder"></param>
         /// <param name="descriptor"></param>
         /// <returns></returns>
-        public static IRegistrationBuilder<object, TActivatorData, TRegistrationStyle> ConfigureLifecycle<TActivatorData, TRegistrationStyle>
-            (this IRegistrationBuilder<object, TActivatorData, TRegistrationStyle> registrationBuilder, ServiceDescriptor descriptor)
+        public static IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> ConfigureLifecycle<TLimit, TActivatorData, TRegistrationStyle>
+            (this IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> registrationBuilder, ServiceDescriptor descriptor)
         => registrationBuilder.ConfigureLifecycle(descriptor.Lifetime);
 
         /// <summary>
         /// Configures the lifetime for the service component under construction.
         /// </summary>
+        /// <typeparam name="TLimit"></typeparam>
         /// <typeparam name="TActivatorData"></typeparam>
         /// <typeparam name="TRegistrationStyle"></typeparam>
         /// <param name="registrationBuilder"></param>
         /// <param name="lifetime"></param>
         /// <returns><c>registrationBuilder</c></returns>
-        public static IRegistrationBuilder<object, TActivatorData, TRegistrationStyle> ConfigureLifecycle<TActivatorData, TRegistrationStyle>
-            (this IRegistrationBuilder<object, TActivatorData, TRegistrationStyle> registrationBuilder, ServiceLifetime lifetime)
+        public static IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> ConfigureLifecycle<TLimit, TActivatorData, TRegistrationStyle>
+            (this IRegistrationBuilder<TLimit, TActivatorData, TRegistrationStyle> registrationBuilder, ServiceLifetime lifetime)
         {
             return lifetime switch
             {

@@ -3,6 +3,7 @@ using Basilisk.Injection.Services;
 using Basilisk.Injection.Support;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Basilisk.Injection
 {
@@ -36,6 +37,17 @@ namespace Basilisk.Injection
         }
 
         /// <summary>
+        /// Configure the internal <see cref="ContainerBuilder"/>
+        /// </summary>
+        /// <param name="configurer"></param>
+        /// <returns></returns>
+        public InjectorBuilder Configure(Action<ContainerBuilder> configurer)
+        {
+            configurer(Builder);
+            return this;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="TService"></typeparam>
@@ -46,6 +58,32 @@ namespace Basilisk.Injection
             where TImplementor : notnull
         {
             Builder.RegisterType<TImplementor>().As<TService>().SingleInstance();
+            return this;
+        }
+
+        /// <summary>
+        /// Adds the given instance.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public InjectorBuilder AddInstance<T>(T instance)
+            where T : class
+        {
+            Builder.RegisterInstance(instance);
+            return this;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TImplementor"></typeparam>
+        /// <param name="lifetime"></param>
+        /// <returns></returns>
+        public InjectorBuilder AddHostedService<TImplementor>(ServiceLifetime lifetime = ServiceLifetime.Singleton)
+            where TImplementor : IHostedService
+        {
+            Builder.RegisterType<TImplementor>().As<IHostedService>().ConfigureLifecycle(lifetime);
 
             return this;
         }
