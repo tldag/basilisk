@@ -112,11 +112,11 @@ namespace Basilisk.Injection.Services
 
             if (descriptor.ServiceType.GetTypeInfo().IsGenericTypeDefinition)
             {
-                ConfigureLifecycle(Builder.RegisterGeneric(descriptor.ImplementationType).As(descriptor.ServiceType), descriptor);
+                Builder.RegisterGeneric(descriptor.ImplementationType).As(descriptor.ServiceType).ConfigureLifecycle(descriptor);
             }
             else
             {
-                ConfigureLifecycle(Builder.RegisterType(descriptor.ImplementationType).As(descriptor.ServiceType), descriptor);
+                Builder.RegisterType(descriptor.ImplementationType).As(descriptor.ServiceType).ConfigureLifecycle(descriptor);
             }
         }
 
@@ -132,8 +132,9 @@ namespace Basilisk.Injection.Services
             object factory(IComponentContext context, IEnumerable<Parameter> _)
                 => descriptor.ImplementationFactory(context.Resolve<IServiceProvider>());
 
-            IComponentRegistration registration = ConfigureLifecycle(
-                    RegistrationBuilder.ForDelegate(descriptor.ServiceType, factory), descriptor)
+            IComponentRegistration registration = RegistrationBuilder
+                .ForDelegate(descriptor.ServiceType, factory)
+                .ConfigureLifecycle(descriptor)
                 .CreateRegistration();
 
             Builder.RegisterComponent(registration);
@@ -148,35 +149,7 @@ namespace Basilisk.Injection.Services
             if (descriptor.ImplementationInstance is null)
                 return;
 
-            ConfigureLifecycle(Builder.RegisterInstance(descriptor.ImplementationInstance).As(descriptor.ServiceType), descriptor);
-        }
-
-        /// <summary>
-        /// Configures the lifecycle of the given partial registration according to the given descriptor.
-        /// </summary>
-        /// <typeparam name="TActivatorData"></typeparam>
-        /// <typeparam name="TRegistrationStyle"></typeparam>
-        /// <param name="registrationBuilder"></param>
-        /// <param name="descriptor"></param>
-        protected virtual IRegistrationBuilder<object, TActivatorData, TRegistrationStyle> ConfigureLifecycle<TActivatorData, TRegistrationStyle>(
-            IRegistrationBuilder<object, TActivatorData, TRegistrationStyle> registrationBuilder, ServiceDescriptor descriptor)
-        {
-            switch (descriptor.Lifetime)
-            {
-                case ServiceLifetime.Singleton:
-                    registrationBuilder.SingleInstance();
-                    break;
-
-                case ServiceLifetime.Scoped:
-                    registrationBuilder.InstancePerLifetimeScope();
-                    break;
-
-                case ServiceLifetime.Transient:
-                    registrationBuilder.InstancePerDependency();
-                    break;
-            }
-
-            return registrationBuilder;
+            Builder.RegisterInstance(descriptor.ImplementationInstance).As(descriptor.ServiceType).ConfigureLifecycle(descriptor);
         }
     }
 }
