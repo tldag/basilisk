@@ -27,7 +27,7 @@ namespace Basilisk.Injection.Services
         }
 
         /// <inheritdoc/>
-        public async Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken = default)
         {
             foreach (IHostedService service in services)
             {
@@ -36,7 +36,7 @@ namespace Basilisk.Injection.Services
         }
 
         /// <inheritdoc/>
-        public async Task StopAsync(CancellationToken cancellationToken)
+        public async Task StopAsync(CancellationToken cancellationToken = default)
         {
             List<Exception> exceptions = new();
 
@@ -59,16 +59,33 @@ namespace Basilisk.Injection.Services
         }
 
         /// <inheritdoc/>
-        public async Task WaitAsync(CancellationToken cancellationToken)
+        public async Task WaitAsync(CancellationToken cancellationToken = default)
         {
+            List<Exception> exceptions = new();
+
             foreach (BackgroundService service in services.OfType<BackgroundService>())
             {
                 Task task = service.ExecuteTask;
 
                 if (task is not null)
                 {
-                    await task.ConfigureAwait(false);
+                    try
+                    {
+                        await task.ConfigureAwait(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (task.IsCanceled && ex is OperationCanceledException)
+                            continue;
+
+                        exceptions.Add(ex);
+                    }
                 }
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new AggregateException(exceptions);
             }
         }
     }

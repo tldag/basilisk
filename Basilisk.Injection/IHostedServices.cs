@@ -20,20 +20,20 @@ namespace Basilisk.Injection
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task StartAsync(CancellationToken cancellationToken);
+        public Task StartAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Calls <see cref="IHostedService.StopAsync(CancellationToken)"/> on all hosted services.
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task StopAsync(CancellationToken cancellationToken);
+        public Task StopAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Waits for the <see cref="BackgroundService"/>s to terminate.
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task WaitAsync(CancellationToken cancellationToken);
+        public Task WaitAsync(CancellationToken cancellationToken = default);
     }
 }

@@ -101,9 +101,9 @@ namespace Basilisk.Tests.Injection
 
             IHostedServices hostedServices = injector.Resolve<IHostedServices>();
 
-            hostedServices.StartAsync(default).Wait();
-            hostedServices.WaitAsync(default).Wait();
-            hostedServices.StopAsync(default).Wait();
+            hostedServices.StartAsync().Wait();
+            hostedServices.WaitAsync().Wait();
+            hostedServices.StopAsync().Wait();
 
             Assert.AreEqual(1, data.Service1Started);
             Assert.AreEqual(1, data.Service1Stopped);
