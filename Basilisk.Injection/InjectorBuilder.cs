@@ -1,15 +1,8 @@
 ﻿using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Reflection;
-using Autofac.Builder;
-using Autofac.Core;
 using Basilisk.Injection.Services;
-using Basilisk.Injection.Inject;
+using Basilisk.Injection.Support;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Basilisk.Injection
 {
@@ -35,7 +28,7 @@ namespace Basilisk.Injection
         /// <returns>The injector.</returns>
         public virtual IInjector Build()
         {
-            Builder.Populate(this);
+            Populate();
 
             IContainer container = Builder.Build();
 
@@ -48,7 +41,7 @@ namespace Basilisk.Injection
         /// <typeparam name="TService"></typeparam>
         /// <typeparam name="TImplementor"></typeparam>
         /// <returns></returns>
-        public InjectorBuilder RegisterSingleton<TService, TImplementor>()
+        public InjectorBuilder AddSingleton<TService, TImplementor>()
             where TService : notnull
             where TImplementor : notnull
         {
@@ -58,20 +51,14 @@ namespace Basilisk.Injection
         }
 
         /// <summary>
-        /// Returns the service descriptors implementing <c>IHostedService</c>.
-        /// </summary>
-        /// <returns>Service descriptors.</returns>
-        protected virtual IEnumerable<ServiceDescriptor> GetHostedServices()
-        {
-            return this.Where(sd => sd.ServiceType.IsAssignableTo<IHostedService>());
-        }
-
-        /// <summary>
         /// Populates the builder with the services.
         /// </summary>
         protected virtual void Populate()
         {
             ServicePopulator.Create(Builder).Populate(this);
+
+            Builder.RegisterType<HostedServices>().As<IHostedServices>().SingleInstance();
+            Builder.RegisterType<InjectorHost>().As<IHost>().SingleInstance();
         }
     }
 }
