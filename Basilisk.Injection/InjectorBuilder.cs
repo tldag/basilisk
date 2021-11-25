@@ -48,7 +48,7 @@ namespace Basilisk.Injection
         {
             IConfiguration hostConfiguration = CreateHostConfiguration();
             IHostEnvironment hostEnvironment = CreateHostEnvironment(hostConfiguration);
-            HostBuilderContext hostBuilderContext = CreateHostBuilderContext(hostEnvironment);
+            HostBuilderContext hostBuilderContext = CreateHostBuilderContext(hostEnvironment, hostConfiguration);
 
             this.AddLogging();
             this.AddInstance(hostBuilderContext);
@@ -68,12 +68,12 @@ namespace Basilisk.Injection
         /// Creates the <see cref="HostBuilderContext"/>.
         /// </summary>
         /// <returns></returns>
-        protected virtual HostBuilderContext CreateHostBuilderContext(IHostEnvironment hostEnvironment)
+        protected virtual HostBuilderContext CreateHostBuilderContext(IHostEnvironment hostEnvironment, IConfiguration hostConfiguration)
         {
             HostBuilderContext context = new(Properties);
 
             context.HostingEnvironment = hostEnvironment;
-            // TODO: populate members.
+            context.Configuration = hostConfiguration;
 
             return context;
         }
