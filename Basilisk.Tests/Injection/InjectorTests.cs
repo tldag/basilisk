@@ -15,15 +15,23 @@ namespace Basilisk.Tests.Injection
     public class InjectorTests
     {
         /// <summary>
+        /// TestService.
+        /// </summary>
+        public class TestService { }
+
+        /// <summary>
         /// Test.
         /// </summary>
         [TestMethod]
         public void Test()
         {
-            using IInjector injector = InjectorBuilder
+            IInjectorBuilder builder = InjectorBuilder
                 .Create()
-                .SetContentRoot(AppContext.BaseDirectory)
-                .Build();
+                .SetContentRoot(AppContext.BaseDirectory);
+
+            builder.ConfigureServices((_, services) => services.AddSingleton<TestService>());
+
+            using IInjector injector = builder.Build();
 
             IServiceProvider serviceProvider1 = injector.Resolve<IServiceProvider>();
             IHost host1 = injector.Resolve<IHost>();
@@ -42,9 +50,11 @@ namespace Basilisk.Tests.Injection
 
             HostBuilderContext hostBuilderContext = injector.Resolve<HostBuilderContext>();
             IConfiguration configuration = injector.Resolve<IConfiguration>();
+            TestService testService = injector.Resolve<TestService>();
 
             Assert.IsNotNull(hostBuilderContext);
             Assert.IsNotNull(configuration);
+            Assert.IsNotNull(testService);
         }
     }
 }

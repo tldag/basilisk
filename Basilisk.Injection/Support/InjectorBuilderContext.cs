@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,14 @@ namespace Basilisk.Injection.Support
         protected List<Action<IConfigurationBuilder>> HostConfigurers { get; } = new();
 
         /// <summary>
-        /// App configurers
+        /// App configurers.
         /// </summary>
         protected List<Action<HostBuilderContext, IConfigurationBuilder>> AppConfigurers { get; } = new();
+
+        /// <summary>
+        /// Service configurers.
+        /// </summary>
+        protected List<Action<HostBuilderContext, IServiceCollection>> ServiceConfigurers { get; } = new();
 
         /// <inheritdoc/>
         public ContainerBuilder ContainerBuilder { get; } = new();
@@ -54,6 +60,11 @@ namespace Basilisk.Injection.Support
         public HostBuilderContext HostBuilderContext
         { get => hostBuilderContext ??= Factory.CreateHostBuilderContext(Properties, HostEnvironment, HostConfiguration); }
 
+        private IServiceCollection? services = null;
+
+        /// <inheritdoc/>
+        public IServiceCollection Services { get => services ??= Factory.CreateServices(HostBuilderContext, ServiceConfigurers); }
+
         /// <summary>
         /// C'tor.
         /// </summary>
@@ -73,6 +84,12 @@ namespace Basilisk.Injection.Support
         public void AddAppConfigurer(Action<HostBuilderContext, IConfigurationBuilder> configurer)
         {
             AppConfigurers.Add(configurer);
+        }
+
+        /// <inheritdoc/>
+        public void AddServiceConfigurer(Action<HostBuilderContext, IServiceCollection> configurer)
+        {
+            ServiceConfigurers.Add(configurer);
         }
     }
 }

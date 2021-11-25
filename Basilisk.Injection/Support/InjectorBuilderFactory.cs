@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
@@ -75,6 +76,20 @@ namespace Basilisk.Injection.Support
             context.Configuration = hostConfiguration;
 
             return context;
+        }
+
+        /// <inheritdoc/>
+        public IServiceCollection CreateServices(HostBuilderContext hostBuilderContext,
+            IEnumerable<Action<HostBuilderContext, IServiceCollection>> configurers)
+        {
+            IServiceCollection services = new ServiceCollection();
+
+            foreach (Action<HostBuilderContext, IServiceCollection> configurer in configurers)
+            {
+                configurer(hostBuilderContext, services);
+            }
+
+            return services;
         }
     }
 }

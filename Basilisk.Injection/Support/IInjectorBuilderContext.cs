@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,11 @@ namespace Basilisk.Injection.Support
         public HostBuilderContext HostBuilderContext { get; }
 
         /// <summary>
+        /// Additional services.
+        /// </summary>
+        public IServiceCollection Services { get; }
+
+        /// <summary>
         /// Adds the given host configurer.
         /// </summary>
         /// <param name="configurer"></param>
@@ -52,5 +58,11 @@ namespace Basilisk.Injection.Support
         /// </summary>
         /// <param name="configurer"></param>
         public void AddAppConfigurer(Action<HostBuilderContext, IConfigurationBuilder> configurer);
+
+        /// <summary>
+        /// Adds the given service configurer.
+        /// </summary>
+        /// <param name="configurer"></param>
+        public void AddServiceConfigurer(Action<HostBuilderContext, IServiceCollection> configurer);
     }
 }

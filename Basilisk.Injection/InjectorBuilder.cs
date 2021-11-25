@@ -3,11 +3,13 @@ using Basilisk.Injection.Services;
 using Basilisk.Injection.Support;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using static Basilisk.Injection.Support.ContentRootPathHelpers;
 
@@ -82,6 +84,7 @@ namespace Basilisk.Injection
             ContainerBuilder.RegisterType<HostedServices>().As<IHostedServices>().SingleInstance();
             ContainerBuilder.RegisterType<InjectorHost>().As<IHost>().SingleInstance();
 
+            Context.Services.ToList().ForEach(d => this.Add(d));
             ServicePopulator.Create(ContainerBuilder).Populate(this);
 
             IContainer container = ContainerBuilder.Build();
@@ -104,11 +107,7 @@ namespace Basilisk.Injection
 
         /// <inheritdoc/>
         public IHostBuilder ConfigureServices(Action<HostBuilderContext, IServiceCollection> configureDelegate)
-        {
-            // TODO: implement
-            // return this;
-            throw new NotImplementedException();
-        }
+        { Context.AddServiceConfigurer(configureDelegate); return this; }
 
         /// <inheritdoc/>
         public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(IServiceProviderFactory<TContainerBuilder> factory)

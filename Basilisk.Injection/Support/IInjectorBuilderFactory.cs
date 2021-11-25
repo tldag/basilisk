@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,16 @@ namespace Basilisk.Injection.Support
         /// <param name="hostEnvironment"></param>
         /// <param name="hostConfiguration"></param>
         /// <returns></returns>
-        public HostBuilderContext CreateHostBuilderContext(
-            IDictionary<object, object> properties, IHostEnvironment hostEnvironment, IConfiguration hostConfiguration);
+        public HostBuilderContext CreateHostBuilderContext( IDictionary<object, object> properties, IHostEnvironment hostEnvironment,
+            IConfiguration hostConfiguration);
+
+        /// <summary>
+        /// Creates additional services configured by <see cref="IHostBuilder.ConfigureServices(Action{HostBuilderContext, IServiceCollection})"/>.
+        /// </summary>
+        /// <param name="hostBuilderContext"></param>
+        /// <param name="configurers"></param>
+        /// <returns></returns>
+        public IServiceCollection CreateServices(HostBuilderContext hostBuilderContext,
+            IEnumerable<Action<HostBuilderContext, IServiceCollection>> configurers);
     }
 }
