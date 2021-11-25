@@ -93,7 +93,7 @@ namespace Basilisk.Tests.Injection
         {
             Data data = new();
 
-            IInjector injector = InjectorBuilder.Create()
+            using IInjector injector = InjectorBuilder.Create()
                 .AddInstance(data)
                 .AddHostedService<Service1>()
                 .AddHostedService<Service2>()

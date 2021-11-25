@@ -42,26 +42,16 @@ namespace Basilisk.SystemServices
             if (HandleCommandLine(args))
                 return;
 
-            RunAsync(CancellationToken.None).Wait();
-        }
-
-        /// <summary>
-        /// Runs the service in a stoppable mode (used internally and for testing).
-        /// </summary>
-        /// <param name="stopToken">The token to stop the service.</param>
-        /// <returns>Awaitale task.</returns>
-        public async Task RunAsync(CancellationToken stopToken)
-        {
             using IInjector injector = CreateInjector();
 
-            await injector.RunAsync(stopToken);
+            injector.Run();
         }
 
         /// <summary>
         /// Creates the injector containing the service.
         /// </summary>
         /// <returns></returns>
-        protected virtual IInjector CreateInjector()
+        public virtual IInjector CreateInjector()
         {
             InjectorBuilder builder = new();
 
