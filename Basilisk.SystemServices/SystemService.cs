@@ -10,9 +10,10 @@ namespace Basilisk.SystemServices
     /// </summary>
     public class SystemService : BackgroundService, ISystemService, IDisposable
     {
-        public virtual void Dispose()
+        public override void Dispose()
         {
             base.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
