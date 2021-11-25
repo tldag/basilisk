@@ -3,6 +3,7 @@ using Basilisk.Injection.Services;
 using Basilisk.Injection.Support;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using System;
 
 namespace Basilisk.Injection
@@ -42,6 +43,9 @@ namespace Basilisk.Injection
         protected virtual void Populate()
         {
             ServicePopulator.Create(Builder).Populate(this);
+
+            // Required to allow IHost.RunAsync
+            this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>();
 
             Builder.RegisterType<HostedServices>().As<IHostedServices>().SingleInstance();
             Builder.RegisterType<InjectorHost>().As<IHost>().SingleInstance();

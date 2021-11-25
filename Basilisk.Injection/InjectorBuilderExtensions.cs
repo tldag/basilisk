@@ -28,8 +28,18 @@ namespace Basilisk.Injection
         /// <param name="sb"></param>
         /// <returns></returns>
         public static InjectorBuilder AddSingleton<TService, TImplementor>(this InjectorBuilder sb)
-            where TService : notnull where TImplementor : notnull
+            where TService : notnull where TImplementor : class
         { sb.Builder.RegisterType<TImplementor>().As<TService>().SingleInstance(); return sb; }
+
+        /// <summary>
+        /// Registers a type with its implemented interfaces.
+        /// </summary>
+        /// <typeparam name="TImplementor"></typeparam>
+        /// <param name="sb"></param>
+        /// <returns></returns>
+        public static InjectorBuilder AddSingleton<TImplementor>(this InjectorBuilder sb)
+            where TImplementor : class
+        { sb.Builder.RegisterType<TImplementor>().AsImplementedInterfaces().SingleInstance(); return sb; }
 
         /// <summary>
         /// 
