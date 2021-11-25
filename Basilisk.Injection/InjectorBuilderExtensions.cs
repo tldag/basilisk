@@ -61,5 +61,14 @@ namespace Basilisk.Injection
         public static InjectorBuilder AddHostedService<TImplementor>(this InjectorBuilder sb, ServiceLifetime lifetime = ServiceLifetime.Singleton)
             where TImplementor : IHostedService
         { sb.Builder.RegisterType<TImplementor>().As<IHostedService>().ConfigureLifecycle(lifetime); return sb; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <param name="contentRoot"></param>
+        /// <returns></returns>
+        public static InjectorBuilder SetContentRoot(this InjectorBuilder sb, string contentRoot)
+        { sb.UseContentRoot(contentRoot); return sb; }
     }
 }

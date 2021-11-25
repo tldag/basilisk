@@ -1,5 +1,7 @@
 ﻿using Basilisk.Injection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.WindowsServices;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -56,9 +58,23 @@ namespace Basilisk.SystemServices
             InjectorBuilder builder = new();
 
             AddService(builder);
+            AddWindowsService(builder);
             // TODO: add infrastructure
 
             return builder.Build();
+        }
+
+        /// <summary>
+        /// Adds windows service infrastructure if running as windows service.
+        /// </summary>
+        /// <param name="builder"></param>
+        protected virtual void AddWindowsService(InjectorBuilder builder)
+        {
+            if (WindowsServiceHelpers.IsWindowsService())
+            {
+                builder.UseContentRoot(AppContext.BaseDirectory);
+                // TODO: more of UseWindowsService 
+            }
         }
 
         /// <summary>

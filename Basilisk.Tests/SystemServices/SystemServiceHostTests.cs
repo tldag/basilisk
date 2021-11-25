@@ -30,6 +30,7 @@ namespace Basilisk.Tests.SystemServices
 
             CancellationTokenSource cts = new();
             CancellationToken stopToken = cts.Token;
+
             injector.Start();
 
             Task task = injector.WaitForShutdownAsync(stopToken);

@@ -3,10 +3,13 @@ using Basilisk.Injection.Services;
 using Basilisk.Injection.Support;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace Basilisk.Injection
 {
@@ -15,6 +18,11 @@ namespace Basilisk.Injection
     /// </summary>
     public class InjectorBuilder : ServiceCollection, IHostBuilder
     {
+        /// <summary>
+        /// Actions to build the configuration.
+        /// </summary>
+        protected List<Action<IConfigurationBuilder>> ConfigureHostConfigActions { get; } = new();
+
         /// <summary>
         /// The Autofac builder.
         /// </summary>
@@ -38,9 +46,13 @@ namespace Basilisk.Injection
         /// <returns>The injector.</returns>
         protected virtual IInjector CreateInjector()
         {
-            this.AddLogging();
+            IConfiguration hostConfiguration = CreateHostConfiguration();
+            IHostEnvironment hostEnvironment = CreateHostEnvironment(hostConfiguration);
+            HostBuilderContext hostBuilderContext = CreateHostBuilderContext(hostEnvironment);
 
-            this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>(); // Required to allow IHost.RunAsync
+            this.AddLogging();
+            this.AddInstance(hostBuilderContext);
+            this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>();
 
             Builder.RegisterType<HostedServices>().As<IHostedServices>().SingleInstance();
             Builder.RegisterType<InjectorHost>().As<IHost>().SingleInstance();
@@ -52,6 +64,75 @@ namespace Basilisk.Injection
             return new Injector(container);
         }
 
+        /// <summary>
+        /// Creates the <see cref="HostBuilderContext"/>.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual HostBuilderContext CreateHostBuilderContext(IHostEnvironment hostEnvironment)
+        {
+            HostBuilderContext context = new(Properties);
+
+            context.HostingEnvironment = hostEnvironment;
+            // TODO: populate members.
+
+            return context;
+        }
+
+        /// <summary>
+        /// Creates the <see cref="IHostEnvironment"/> instance.
+        /// </summary>
+        /// <param name="hostConfiguration"></param>
+        /// <returns></returns>
+        protected virtual IHostEnvironment CreateHostEnvironment(IConfiguration hostConfiguration)
+        {
+            HostingEnvironment environment = new()
+            {
+                EnvironmentName = hostConfiguration[HostDefaults.EnvironmentKey] ?? Environments.Production,
+                ApplicationName = hostConfiguration[HostDefaults.ApplicationKey],
+                ContentRootPath = ResolveContentRootPath(hostConfiguration[HostDefaults.ContentRootKey], AppContext.BaseDirectory)
+            };
+
+            if (string.IsNullOrEmpty(environment.ApplicationName))
+                environment.ApplicationName = Assembly.GetEntryAssembly()?.GetName().Name;
+
+            environment.ContentRootFileProvider = new PhysicalFileProvider(environment.ContentRootPath);
+
+            return environment;
+        }
+
+        /// <summary>
+        /// Resolves the content root path required to create the host environment.
+        /// </summary>
+        /// <param name="contentRootPath"></param>
+        /// <param name="basePath"></param>
+        /// <returns></returns>
+        protected virtual string ResolveContentRootPath(string contentRootPath, string basePath)
+        {
+            if (string.IsNullOrWhiteSpace(contentRootPath))
+                return basePath;
+
+            if (Path.IsPathRooted(contentRootPath))
+                return contentRootPath;
+
+            return Path.Combine(Path.GetFullPath(basePath), contentRootPath);
+        }
+
+        /// <summary>
+        /// Creates the host configuration.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IConfiguration CreateHostConfiguration()
+        {
+            IConfigurationBuilder configBuilder = new ConfigurationBuilder();
+
+            foreach (Action<IConfigurationBuilder> action in ConfigureHostConfigActions)
+            {
+                action(configBuilder);
+            }
+
+            return configBuilder.Build();
+        }
+
         // IHostBuilder
 
         /// <inheritdoc/>
@@ -60,9 +141,8 @@ namespace Basilisk.Injection
         /// <inheritdoc/>
         public IHostBuilder ConfigureHostConfiguration(Action<IConfigurationBuilder> configureDelegate)
         {
-            // TODO: implement
-            // return this;
-            throw new NotImplementedException();
+            ConfigureHostConfigActions.Add(configureDelegate);
+            return this;
         }
 
         /// <inheritdoc/>

@@ -19,7 +19,10 @@ namespace Basilisk.Tests.Injection
         [TestMethod]
         public void Test()
         {
-            using IInjector injector = InjectorBuilder.Create().Build();
+            using IInjector injector = InjectorBuilder
+                .Create()
+                .SetContentRoot(AppContext.BaseDirectory)
+                .Build();
 
             IServiceProvider serviceProvider1 = injector.Resolve<IServiceProvider>();
             IHost host1 = injector.Resolve<IHost>();
@@ -35,6 +38,8 @@ namespace Basilisk.Tests.Injection
 
             Assert.IsTrue(ReferenceEquals(serviceProvider1, serviceProvider3));
             Assert.IsTrue(ReferenceEquals(host1, host3));
+
+            HostBuilderContext hostBuilderContext = injector.Resolve<HostBuilderContext>();
         }
     }
 }
