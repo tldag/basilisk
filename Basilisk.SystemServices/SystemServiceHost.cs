@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.WindowsServices;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Basilisk.SystemServices
 {
@@ -55,7 +53,7 @@ namespace Basilisk.SystemServices
         /// <returns></returns>
         public virtual IInjector CreateInjector()
         {
-            InjectorBuilder builder = new();
+            IInjectorBuilder builder = InjectorBuilder.Create();
 
             AddService(builder);
             AddWindowsService(builder);
@@ -68,7 +66,7 @@ namespace Basilisk.SystemServices
         /// Adds windows service infrastructure if running as windows service.
         /// </summary>
         /// <param name="builder"></param>
-        protected virtual void AddWindowsService(InjectorBuilder builder)
+        protected virtual void AddWindowsService(IInjectorBuilder builder)
         {
             if (WindowsServiceHelpers.IsWindowsService())
             {
@@ -81,7 +79,7 @@ namespace Basilisk.SystemServices
         /// Registers the service into the given builder.
         /// </summary>
         /// <param name="builder">The builder.</param>
-        protected abstract void AddService(InjectorBuilder builder);
+        protected abstract void AddService(IInjectorBuilder builder);
 
         /// <summary>
         /// Handles "install" and "uninstall".
@@ -116,7 +114,7 @@ namespace Basilisk.SystemServices
         public SystemServiceHost(string name) : base(name) { }
 
         /// <inheritdoc/>
-        protected override void AddService(InjectorBuilder builder)
+        protected override void AddService(IInjectorBuilder builder)
         { builder.AddSingleton<T>(); }
     }
 }

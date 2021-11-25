@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace Basilisk.Tests.SystemServices
 {
     /// <summary>
-    /// Mimicking <see cref="SystemServiceHost.AddWindowsService(InjectorBuilder)"/>.
+    /// Mimicking <see cref="SystemServiceHost.AddWindowsService(IInjectorBuilder)"/>.
     /// </summary>
     [TestClass]
     public class AddWindowsServiceTests
@@ -22,10 +22,9 @@ namespace Basilisk.Tests.SystemServices
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;
 
-            InjectorBuilder builder = new();
+            IInjectorBuilder builder = InjectorBuilder.Create();
 
             builder.UseContentRoot(AppContext.BaseDirectory);
-
         }
     }
 }

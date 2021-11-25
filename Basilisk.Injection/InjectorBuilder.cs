@@ -29,6 +29,11 @@ namespace Basilisk.Injection
         public ContainerBuilder ContainerBuilder { get; } = new();
 
         /// <summary>
+        /// Protected c'tor. Use <see cref="Create"/> or create a sub-class.
+        /// </summary>
+        protected InjectorBuilder() { }
+
+        /// <summary>
         /// Creates a new builder.
         /// </summary>
         /// <returns>A new builder.</returns>
