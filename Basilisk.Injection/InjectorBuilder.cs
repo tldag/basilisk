@@ -8,8 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
+using static Basilisk.Injection.Support.ContentRootPathHelpers;
 
 namespace Basilisk.Injection
 {
@@ -18,15 +18,24 @@ namespace Basilisk.Injection
     /// </summary>
     public class InjectorBuilder : ServiceCollection, IInjectorBuilder
     {
+        private IInjectorBuilderFactory? factory = null;
+
         /// <summary>
-        /// Actions to build the configuration.
+        /// The factory used to create various elements.
         /// </summary>
-        protected List<Action<IConfigurationBuilder>> ConfigureHostConfigActions { get; } = new();
+        protected IInjectorBuilderFactory Factory { get => factory ??= CreateInjectorBuilderFactory(); }
+
+        private IInjectorBuilderContext? context = null;
+
+        /// <summary>
+        /// The context used to create various elements.
+        /// </summary>
+        protected IInjectorBuilderContext Context { get => context ??= Factory.CreateContext(); }
 
         /// <summary>
         /// The Autofac builder.
         /// </summary>
-        public ContainerBuilder ContainerBuilder { get; } = new();
+        public ContainerBuilder ContainerBuilder { get => Context.ContainerBuilder; }
 
         /// <summary>
         /// Protected c'tor. Use <see cref="Create"/> or create a sub-class.
@@ -46,17 +55,20 @@ namespace Basilisk.Injection
         public virtual IInjector Build() => CreateInjector();
 
         /// <summary>
+        /// Creates the factory used to create various elements.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IInjectorBuilderFactory CreateInjectorBuilderFactory()
+            => new InjectorBuilderFactory();
+
+        /// <summary>
         /// Creates the injector. Called from either <see cref="Build"/> or <see cref="IHostBuilder.Build"/>
         /// </summary>
         /// <returns>The injector.</returns>
         protected virtual IInjector CreateInjector()
         {
-            IConfiguration hostConfiguration = CreateHostConfiguration();
-            IHostEnvironment hostEnvironment = CreateHostEnvironment(hostConfiguration);
-            HostBuilderContext hostBuilderContext = CreateHostBuilderContext(hostEnvironment, hostConfiguration);
-
             this.AddLogging();
-            this.AddInstance(hostBuilderContext);
+            this.AddInstance(Context.HostBuilderContext);
             this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>();
 
             ContainerBuilder.RegisterType<HostedServices>().As<IHostedServices>().SingleInstance();
@@ -69,86 +81,14 @@ namespace Basilisk.Injection
             return new Injector(container);
         }
 
-        /// <summary>
-        /// Creates the <see cref="HostBuilderContext"/>.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual HostBuilderContext CreateHostBuilderContext(IHostEnvironment hostEnvironment, IConfiguration hostConfiguration)
-        {
-            HostBuilderContext context = new(Properties);
-
-            context.HostingEnvironment = hostEnvironment;
-            context.Configuration = hostConfiguration;
-
-            return context;
-        }
-
-        /// <summary>
-        /// Creates the <see cref="IHostEnvironment"/> instance.
-        /// </summary>
-        /// <param name="hostConfiguration"></param>
-        /// <returns></returns>
-        protected virtual IHostEnvironment CreateHostEnvironment(IConfiguration hostConfiguration)
-        {
-            HostingEnvironment environment = new()
-            {
-                EnvironmentName = hostConfiguration[HostDefaults.EnvironmentKey] ?? Environments.Production,
-                ApplicationName = hostConfiguration[HostDefaults.ApplicationKey],
-                ContentRootPath = ResolveContentRootPath(hostConfiguration[HostDefaults.ContentRootKey], AppContext.BaseDirectory)
-            };
-
-            if (string.IsNullOrEmpty(environment.ApplicationName))
-                environment.ApplicationName = Assembly.GetEntryAssembly()?.GetName().Name;
-
-            environment.ContentRootFileProvider = new PhysicalFileProvider(environment.ContentRootPath);
-
-            return environment;
-        }
-
-        /// <summary>
-        /// Resolves the content root path required to create the host environment.
-        /// </summary>
-        /// <param name="contentRootPath"></param>
-        /// <param name="basePath"></param>
-        /// <returns></returns>
-        protected virtual string ResolveContentRootPath(string contentRootPath, string basePath)
-        {
-            if (string.IsNullOrWhiteSpace(contentRootPath))
-                return basePath;
-
-            if (Path.IsPathRooted(contentRootPath))
-                return contentRootPath;
-
-            return Path.Combine(Path.GetFullPath(basePath), contentRootPath);
-        }
-
-        /// <summary>
-        /// Creates the host configuration.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual IConfiguration CreateHostConfiguration()
-        {
-            IConfigurationBuilder configBuilder = new ConfigurationBuilder();
-
-            foreach (Action<IConfigurationBuilder> action in ConfigureHostConfigActions)
-            {
-                action(configBuilder);
-            }
-
-            return configBuilder.Build();
-        }
-
         // IHostBuilder
 
         /// <inheritdoc/>
-        public IDictionary<object, object> Properties { get; } = new Dictionary<object, object>();
+        public IDictionary<object, object> Properties { get => Context.Properties; }
 
         /// <inheritdoc/>
         public IHostBuilder ConfigureHostConfiguration(Action<IConfigurationBuilder> configureDelegate)
-        {
-            ConfigureHostConfigActions.Add(configureDelegate);
-            return this;
-        }
+        { Context.AddHostConfigurer(configureDelegate); return this; }
 
         /// <inheritdoc/>
         public IHostBuilder ConfigureAppConfiguration(Action<HostBuilderContext, IConfigurationBuilder> configureDelegate)
