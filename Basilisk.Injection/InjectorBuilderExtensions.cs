@@ -17,8 +17,8 @@ namespace Basilisk.Injection
         /// <param name="sb"></param>
         /// <param name="configurer"></param>
         /// <returns></returns>
-        public static InjectorBuilder Configure(this InjectorBuilder sb, Action<ContainerBuilder> configurer)
-        { configurer(sb.Builder); return sb; }
+        public static IInjectorBuilder Configure(this IInjectorBuilder sb, Action<ContainerBuilder> configurer)
+        { configurer(sb.ContainerBuilder); return sb; }
 
         /// <summary>
         /// 
@@ -27,9 +27,9 @@ namespace Basilisk.Injection
         /// <typeparam name="TImplementor"></typeparam>
         /// <param name="sb"></param>
         /// <returns></returns>
-        public static InjectorBuilder AddSingleton<TService, TImplementor>(this InjectorBuilder sb)
+        public static IInjectorBuilder AddSingleton<TService, TImplementor>(this IInjectorBuilder sb)
             where TService : notnull where TImplementor : class
-        { sb.Builder.RegisterType<TImplementor>().As<TService>().SingleInstance(); return sb; }
+        { sb.ContainerBuilder.RegisterType<TImplementor>().As<TService>().SingleInstance(); return sb; }
 
         /// <summary>
         /// Registers a type with its implemented interfaces.
@@ -37,9 +37,9 @@ namespace Basilisk.Injection
         /// <typeparam name="TImplementor"></typeparam>
         /// <param name="sb"></param>
         /// <returns></returns>
-        public static InjectorBuilder AddSingleton<TImplementor>(this InjectorBuilder sb)
+        public static IInjectorBuilder AddSingleton<TImplementor>(this IInjectorBuilder sb)
             where TImplementor : class
-        { sb.Builder.RegisterType<TImplementor>().AsImplementedInterfaces().SingleInstance(); return sb; }
+        { sb.ContainerBuilder.RegisterType<TImplementor>().AsImplementedInterfaces().SingleInstance(); return sb; }
 
         /// <summary>
         /// 
@@ -48,8 +48,8 @@ namespace Basilisk.Injection
         /// <param name="sb"></param>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public static InjectorBuilder AddInstance<T>(this InjectorBuilder sb, T instance) where T : class
-        { sb.Builder.RegisterInstance(instance); return sb; }
+        public static IInjectorBuilder AddInstance<T>(this IInjectorBuilder sb, T instance) where T : class
+        { sb.ContainerBuilder.RegisterInstance(instance); return sb; }
 
         /// <summary>
         /// 
@@ -58,9 +58,9 @@ namespace Basilisk.Injection
         /// <param name="sb"></param>
         /// <param name="lifetime"></param>
         /// <returns></returns>
-        public static InjectorBuilder AddHostedService<TImplementor>(this InjectorBuilder sb, ServiceLifetime lifetime = ServiceLifetime.Singleton)
+        public static IInjectorBuilder AddHostedService<TImplementor>(this IInjectorBuilder sb, ServiceLifetime lifetime = ServiceLifetime.Singleton)
             where TImplementor : IHostedService
-        { sb.Builder.RegisterType<TImplementor>().As<IHostedService>().ConfigureLifecycle(lifetime); return sb; }
+        { sb.ContainerBuilder.RegisterType<TImplementor>().As<IHostedService>().ConfigureLifecycle(lifetime); return sb; }
 
         /// <summary>
         /// 
@@ -68,7 +68,7 @@ namespace Basilisk.Injection
         /// <param name="sb"></param>
         /// <param name="contentRoot"></param>
         /// <returns></returns>
-        public static InjectorBuilder SetContentRoot(this InjectorBuilder sb, string contentRoot)
+        public static IInjectorBuilder SetContentRoot(this IInjectorBuilder sb, string contentRoot)
         { sb.UseContentRoot(contentRoot); return sb; }
     }
 }

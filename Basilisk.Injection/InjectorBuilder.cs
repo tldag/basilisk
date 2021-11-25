@@ -16,7 +16,7 @@ namespace Basilisk.Injection
     /// <summary>
     /// Injector builder.
     /// </summary>
-    public class InjectorBuilder : ServiceCollection, IHostBuilder
+    public class InjectorBuilder : ServiceCollection, IInjectorBuilder
     {
         /// <summary>
         /// Actions to build the configuration.
@@ -26,13 +26,13 @@ namespace Basilisk.Injection
         /// <summary>
         /// The Autofac builder.
         /// </summary>
-        public ContainerBuilder Builder { get; } = new();
+        public ContainerBuilder ContainerBuilder { get; } = new();
 
         /// <summary>
         /// Creates a new builder.
         /// </summary>
         /// <returns>A new builder.</returns>
-        public static InjectorBuilder Create() => new();
+        public static IInjectorBuilder Create() => new InjectorBuilder();
 
         /// <summary>
         /// Builds the injector.
@@ -54,12 +54,12 @@ namespace Basilisk.Injection
             this.AddInstance(hostBuilderContext);
             this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>();
 
-            Builder.RegisterType<HostedServices>().As<IHostedServices>().SingleInstance();
-            Builder.RegisterType<InjectorHost>().As<IHost>().SingleInstance();
+            ContainerBuilder.RegisterType<HostedServices>().As<IHostedServices>().SingleInstance();
+            ContainerBuilder.RegisterType<InjectorHost>().As<IHost>().SingleInstance();
 
-            ServicePopulator.Create(Builder).Populate(this);
+            ServicePopulator.Create(ContainerBuilder).Populate(this);
 
-            IContainer container = Builder.Build();
+            IContainer container = ContainerBuilder.Build();
 
             return new Injector(container);
         }
