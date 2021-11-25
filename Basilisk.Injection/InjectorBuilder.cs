@@ -67,6 +67,14 @@ namespace Basilisk.Injection
         /// <returns>The injector.</returns>
         protected virtual IInjector CreateInjector()
         {
+            HostBuilderContext hostBuilderContext = Context.HostBuilderContext;
+            IConfiguration appConfiguration = Context.AppConfiguration;
+
+            hostBuilderContext.Configuration = appConfiguration;
+
+            this.AddInstance(hostBuilderContext);
+            this.AddInstance(appConfiguration);
+
             this.AddLogging();
             this.AddInstance(Context.HostBuilderContext);
             this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>();
@@ -92,11 +100,7 @@ namespace Basilisk.Injection
 
         /// <inheritdoc/>
         public IHostBuilder ConfigureAppConfiguration(Action<HostBuilderContext, IConfigurationBuilder> configureDelegate)
-        {
-            // TODO: implement
-            // return this;
-            throw new NotImplementedException();
-        }
+        { Context.AddAppConfigurer(configureDelegate); return this; }
 
         /// <inheritdoc/>
         public IHostBuilder ConfigureServices(Action<HostBuilderContext, IServiceCollection> configureDelegate)

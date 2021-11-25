@@ -21,7 +21,18 @@ namespace Basilisk.Injection.Support
         /// </summary>
         /// <param name="configurers"></param>
         /// <returns></returns>
-        public IConfiguration CreateConfiguration(IEnumerable<Action<IConfigurationBuilder>> configurers);
+        public IConfiguration CreateHostConfiguration(IEnumerable<Action<IConfigurationBuilder>> configurers);
+
+        /// <summary>
+        /// Creates the app configuration.
+        /// </summary>
+        /// <param name="hostEnvironment"></param>
+        /// <param name="hostConfiguration"></param>
+        /// <param name="hostBuilderContext"></param>
+        /// <param name="configurers"></param>
+        /// <returns></returns>
+        public IConfiguration CreateAppConfiguration(IHostEnvironment hostEnvironment, IConfiguration hostConfiguration,
+            HostBuilderContext hostBuilderContext, IEnumerable<Action<HostBuilderContext, IConfigurationBuilder>> configurers);
 
         /// <summary>
         /// Creates the host environment.

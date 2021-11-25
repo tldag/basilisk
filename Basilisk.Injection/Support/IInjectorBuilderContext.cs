@@ -27,6 +27,11 @@ namespace Basilisk.Injection.Support
         public IConfiguration HostConfiguration { get; }
 
         /// <summary>
+        /// The app configuration.
+        /// </summary>
+        public IConfiguration AppConfiguration { get; }
+
+        /// <summary>
         /// The host environment.
         /// </summary>
         public IHostEnvironment HostEnvironment { get; }
@@ -41,5 +46,11 @@ namespace Basilisk.Injection.Support
         /// </summary>
         /// <param name="configurer"></param>
         public void AddHostConfigurer(Action<IConfigurationBuilder> configurer);
+
+        /// <summary>
+        /// Adds the given app configurer.
+        /// </summary>
+        /// <param name="configurer"></param>
+        public void AddAppConfigurer(Action<HostBuilderContext, IConfigurationBuilder> configurer);
     }
 }

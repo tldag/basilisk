@@ -19,13 +19,29 @@ namespace Basilisk.Injection.Support
             => new InjectorBuilderContext(this);
 
         /// <inheritdoc/>
-        public IConfiguration CreateConfiguration(IEnumerable<Action<IConfigurationBuilder>> configurers)
+        public IConfiguration CreateHostConfiguration(IEnumerable<Action<IConfigurationBuilder>> configurers)
         {
             IConfigurationBuilder configBuilder = new ConfigurationBuilder();
 
             foreach (Action<IConfigurationBuilder> configurer in configurers)
             {
                 configurer(configBuilder);
+            }
+
+            return configBuilder.Build();
+        }
+
+        /// <inheritdoc/>
+        public IConfiguration CreateAppConfiguration(IHostEnvironment hostEnvironment, IConfiguration hostConfiguration,
+            HostBuilderContext hostBuilderContext, IEnumerable<Action<HostBuilderContext, IConfigurationBuilder>> configurers)
+        {
+            IConfigurationBuilder configBuilder = new ConfigurationBuilder()
+                .SetBasePath(hostEnvironment.ContentRootPath)
+                .AddConfiguration(hostConfiguration, shouldDisposeConfiguration: true);
+
+            foreach (Action<HostBuilderContext, IConfigurationBuilder> configurer in configurers)
+            {
+                configurer(hostBuilderContext, configBuilder);
             }
 
             return configBuilder.Build();

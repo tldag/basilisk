@@ -21,6 +21,11 @@ namespace Basilisk.Injection.Support
         /// </summary>
         protected List<Action<IConfigurationBuilder>> HostConfigurers { get; } = new();
 
+        /// <summary>
+        /// App configurers
+        /// </summary>
+        protected List<Action<HostBuilderContext, IConfigurationBuilder>> AppConfigurers { get; } = new();
+
         /// <inheritdoc/>
         public ContainerBuilder ContainerBuilder { get; } = new();
 
@@ -30,7 +35,13 @@ namespace Basilisk.Injection.Support
         private IConfiguration? hostConfiguration = null;
 
         /// <inheritdoc/>
-        public IConfiguration HostConfiguration { get => hostConfiguration ??= Factory.CreateConfiguration(HostConfigurers); }
+        public IConfiguration HostConfiguration { get => hostConfiguration ??= Factory.CreateHostConfiguration(HostConfigurers); }
+
+        private IConfiguration? appConfiguration = null;
+
+        /// <inheritdoc/>
+        public IConfiguration AppConfiguration
+        { get => appConfiguration ??= Factory.CreateAppConfiguration(HostEnvironment, HostConfiguration, HostBuilderContext, AppConfigurers); }
 
         private IHostEnvironment? hostEnvironment = null;
 
@@ -56,6 +67,12 @@ namespace Basilisk.Injection.Support
         public void AddHostConfigurer(Action<IConfigurationBuilder> configurer)
         {
             HostConfigurers.Add(configurer);
+        }
+
+        /// <inheritdoc/>
+        public void AddAppConfigurer(Action<HostBuilderContext, IConfigurationBuilder> configurer)
+        {
+            AppConfigurers.Add(configurer);
         }
     }
 }

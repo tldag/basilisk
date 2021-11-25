@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Basilisk.Injection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -40,6 +41,10 @@ namespace Basilisk.Tests.Injection
             Assert.IsTrue(ReferenceEquals(host1, host3));
 
             HostBuilderContext hostBuilderContext = injector.Resolve<HostBuilderContext>();
+            IConfiguration configuration = injector.Resolve<IConfiguration>();
+
+            Assert.IsNotNull(hostBuilderContext);
+            Assert.IsNotNull(configuration);
         }
     }
 }
