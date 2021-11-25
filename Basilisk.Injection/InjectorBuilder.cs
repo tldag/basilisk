@@ -42,13 +42,14 @@ namespace Basilisk.Injection
         /// </summary>
         protected virtual void Populate()
         {
-            ServicePopulator.Create(Builder).Populate(this);
+            this.AddLogging();
 
-            // Required to allow IHost.RunAsync
-            this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>();
+            this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>(); // Required to allow IHost.RunAsync
 
             Builder.RegisterType<HostedServices>().As<IHostedServices>().SingleInstance();
             Builder.RegisterType<InjectorHost>().As<IHost>().SingleInstance();
+
+            ServicePopulator.Create(Builder).Populate(this);
         }
     }
 }
