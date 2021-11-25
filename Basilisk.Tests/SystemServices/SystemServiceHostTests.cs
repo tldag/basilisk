@@ -34,7 +34,7 @@ namespace Basilisk.Tests.SystemServices
 
             Task task = injector.WaitForShutdownAsync(stopToken);
 
-            Task.Delay(100).Wait();
+            Task.Delay(20).Wait();
             cts.Cancel();
             task.Wait();
         }
