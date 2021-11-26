@@ -1,18 +1,15 @@
 ﻿using Autofac;
-using Autofac.Extensions.DependencyInjection;
+using Autofac.Core;
+using Autofac.Core.Lifetime;
+using Autofac.Core.Resolving;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using Autofac.Core;
-using Autofac.Core.Lifetime;
-using Autofac.Core.Resolving;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Basilisk.Injection.Support
-
+namespace Basilisk.Injection.Internal
 {
     /// <summary>
     /// Injector

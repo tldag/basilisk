@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Basilisk.Injection.Services
+namespace Basilisk.Injection.Host
 {
     /// <summary>
     /// Implementation of <see cref="IHostedServices"/>.

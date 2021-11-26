@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Basilisk.Injection;
+using Basilisk.Injection.Host;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;

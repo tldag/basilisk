@@ -1,43 +1,31 @@
-﻿using Autofac;
-using Basilisk.Injection.Services;
-using Basilisk.Injection.Support;
+﻿using Basilisk.Injection.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using static Basilisk.Injection.Support.ContentRootPathHelpers;
 
 namespace Basilisk.Injection
 {
     /// <summary>
     /// Injector builder.
     /// </summary>
-    public class InjectorBuilder : ServiceCollection, IInjectorBuilder
+    public abstract class InjectorBuilder : ServiceCollection, IInjectorBuilder
     {
-        private IInjectorBuilderFactory? factory = null;
+        /// <inheritdoc/>
+        public abstract IHostConfig HostConfig { get; }
 
-        /// <summary>
-        /// The factory used to create various elements.
-        /// </summary>
-        protected IInjectorBuilderFactory Factory { get => factory ??= CreateInjectorBuilderFactory(); }
+        /// <inheritdoc/>
+        public abstract IAppConfig AppConfig { get; }
 
-        private IInjectorBuilderContext? context = null;
+        /// <inheritdoc/>
+        public abstract ILogConfig LogConfig { get; }
 
-        /// <summary>
-        /// The context used to create various elements.
-        /// </summary>
-        protected IInjectorBuilderContext Context { get => context ??= Factory.CreateContext(); }
+        /// <inheritdoc/>
+        public abstract IAutofacConfig AutofacConfig { get; }
 
-        /// <summary>
-        /// The Autofac builder.
-        /// </summary>
-        public ContainerBuilder ContainerBuilder { get => Context.ContainerBuilder; }
+        /// <inheritdoc/>
+        public abstract IHostServices HostServices { get; }
 
         /// <summary>
         /// Protected c'tor. Use <see cref="Create"/> or create a sub-class.
@@ -48,66 +36,71 @@ namespace Basilisk.Injection
         /// Creates a new builder.
         /// </summary>
         /// <returns>A new builder.</returns>
-        public static IInjectorBuilder Create() => new InjectorBuilder();
+        public static IInjectorBuilder Create() => new Internal.InjectorBuilder();
+
+        // Build
+
+        /// <summary>
+        /// Creates the injector.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract IInjector BuildInjector();
 
         /// <summary>
         /// Builds the injector.
         /// </summary>
         /// <returns>The injector.</returns>
-        public virtual IInjector Build() => CreateInjector();
+        public virtual IInjector Build() => BuildInjector();
 
-        /// <summary>
-        /// Creates the factory used to create various elements.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual IInjectorBuilderFactory CreateInjectorBuilderFactory()
-            => new InjectorBuilderFactory();
+        /// <inheritdoc/>
+        IHost IHostBuilder.Build() => BuildInjector();
 
-        /// <summary>
-        /// Creates the injector. Called from either <see cref="Build"/> or <see cref="IHostBuilder.Build"/>
-        /// </summary>
-        /// <returns>The injector.</returns>
-        protected virtual IInjector CreateInjector()
-        {
-            HostBuilderContext hostBuilderContext = Context.HostBuilderContext;
-            IConfiguration appConfiguration = Context.AppConfiguration;
+        ///// <summary>
+        ///// Creates the injector. Called from either <see cref="Build"/> or <see cref="IHostBuilder.Build"/>
+        ///// </summary>
+        ///// <returns>The injector.</returns>
+        //protected virtual IInjector CreateInjector()
+        //{
+        //    HostBuilderContext hostBuilderContext = Context.HostBuilderContext;
+        //    IConfiguration appConfiguration = Context.AppConfiguration;
 
-            hostBuilderContext.Configuration = appConfiguration;
+        //    hostBuilderContext.Configuration = appConfiguration;
 
-            this.AddInstance(hostBuilderContext);
-            this.AddInstance(appConfiguration);
+        //    this.AddInstance(hostBuilderContext);
+        //    this.AddInstance(appConfiguration);
 
-            this.AddLogging();
-            this.AddInstance(Context.HostBuilderContext);
-            this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>();
+        //    this.AddSingleton<IHostedServices, HostedServices>();
+        //    this.AddSingleton<IHost, InjectorHost>();
 
-            ContainerBuilder.RegisterType<HostedServices>().As<IHostedServices>().SingleInstance();
-            ContainerBuilder.RegisterType<InjectorHost>().As<IHost>().SingleInstance();
+        //    Logging.Populate(this);
 
-            Context.Services.ToList().ForEach(d => this.Add(d));
-            ServicePopulator.Create(ContainerBuilder).Populate(this);
+        //    this.AddInstance(Context.HostBuilderContext);
+        //    this.AddSingleton<IHostApplicationLifetime, ApplicationLifetime>();
 
-            IContainer container = ContainerBuilder.Build();
+        //    Context.Services.ToList().ForEach(d => this.Add(d));
+        //    ServicePopulator.Create(ContainerBuilder).Populate(this);
 
-            return new Injector(container);
-        }
+        //    IContainer container = ContainerBuilder.Build();
+
+        //    return new Injector(container);
+        //}
 
         // IHostBuilder
 
         /// <inheritdoc/>
-        public IDictionary<object, object> Properties { get => Context.Properties; }
+        public abstract IDictionary<object, object> Properties { get; }
 
         /// <inheritdoc/>
         public IHostBuilder ConfigureHostConfiguration(Action<IConfigurationBuilder> configureDelegate)
-        { Context.AddHostConfigurer(configureDelegate); return this; }
+        { HostConfig.Add(configureDelegate); return this; }
 
         /// <inheritdoc/>
         public IHostBuilder ConfigureAppConfiguration(Action<HostBuilderContext, IConfigurationBuilder> configureDelegate)
-        { Context.AddAppConfigurer(configureDelegate); return this; }
+        { AppConfig.Add(configureDelegate); return this; }
 
         /// <inheritdoc/>
         public IHostBuilder ConfigureServices(Action<HostBuilderContext, IServiceCollection> configureDelegate)
-        { Context.AddServiceConfigurer(configureDelegate); return this; }
+        { HostServices.Add(configureDelegate); return this; }
 
         /// <inheritdoc/>
         public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(IServiceProviderFactory<TContainerBuilder> factory)
@@ -135,7 +128,5 @@ namespace Basilisk.Injection
             throw new NotImplementedException();
         }
 
-        /// <inheritdoc/>
-        IHost IHostBuilder.Build() => CreateInjector();
     }
 }

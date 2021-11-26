@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Basilisk.Injection
+namespace Basilisk.Injection.Host
 {
     /// <summary>
     /// Collection of <see cref="IHostedService"/>.

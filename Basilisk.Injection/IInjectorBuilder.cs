@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Basilisk.Injection.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Collections;
@@ -18,9 +19,29 @@ namespace Basilisk.Injection
         IHostBuilder
     {
         /// <summary>
-        /// The embedded container builder.
+        /// Host configuration
         /// </summary>
-        public ContainerBuilder ContainerBuilder { get; }
+        public IHostConfig HostConfig { get; }
+
+        /// <summary>
+        /// Application specific configuration.
+        /// </summary>
+        public IAppConfig AppConfig { get; }
+
+        /// <summary>
+        /// Logger configuration.
+        /// </summary>
+        public ILogConfig LogConfig { get; }
+
+        /// <summary>
+        /// Autofac configuration
+        /// </summary>
+        public IAutofacConfig AutofacConfig { get; }
+
+        /// <summary>
+        /// Host service callbacks.
+        /// </summary>
+        public IHostServices HostServices { get; }
 
         /// <summary>
         /// Builds the injector.

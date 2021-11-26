@@ -4,6 +4,8 @@ using Basilisk.Injection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace Basilisk.Tests.SystemServices
 {
@@ -25,6 +27,14 @@ namespace Basilisk.Tests.SystemServices
             IInjectorBuilder builder = InjectorBuilder.Create();
 
             builder.UseContentRoot(AppContext.BaseDirectory);
+
+            builder.ConfigureLogging(loggingBuilder =>
+            {
+                Debug.WriteLine("ConfigureLogging");
+                loggingBuilder.AddEventLog();
+            });
+
+            IInjector injector = builder.Build();
         }
     }
 }

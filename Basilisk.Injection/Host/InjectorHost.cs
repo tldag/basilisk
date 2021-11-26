@@ -3,7 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Basilisk.Injection.Support
+namespace Basilisk.Injection.Host
 {
     /// <summary>
     /// <see cref="IHost"/> implementation. 

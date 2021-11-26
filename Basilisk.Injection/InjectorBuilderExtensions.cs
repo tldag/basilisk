@@ -18,7 +18,7 @@ namespace Basilisk.Injection
         /// <param name="configurer"></param>
         /// <returns></returns>
         public static IInjectorBuilder Configure(this IInjectorBuilder sb, Action<ContainerBuilder> configurer)
-        { configurer(sb.ContainerBuilder); return sb; }
+        { sb.AutofacConfig.Add(configurer); return sb; }
 
         /// <summary>
         /// 
@@ -29,7 +29,7 @@ namespace Basilisk.Injection
         /// <returns></returns>
         public static IInjectorBuilder AddSingleton<TService, TImplementor>(this IInjectorBuilder sb)
             where TService : notnull where TImplementor : class
-        { sb.ContainerBuilder.RegisterType<TImplementor>().As<TService>().SingleInstance(); return sb; }
+            => sb.Configure(cb => cb.RegisterType<TImplementor>().As<TService>().SingleInstance());
 
         /// <summary>
         /// Registers a type with its implemented interfaces.
@@ -39,7 +39,7 @@ namespace Basilisk.Injection
         /// <returns></returns>
         public static IInjectorBuilder AddSingleton<TImplementor>(this IInjectorBuilder sb)
             where TImplementor : class
-        { sb.ContainerBuilder.RegisterType<TImplementor>().AsImplementedInterfaces().SingleInstance(); return sb; }
+            => sb.Configure(cb => cb.RegisterType<TImplementor>().AsImplementedInterfaces().SingleInstance());
 
         /// <summary>
         /// 
@@ -49,7 +49,7 @@ namespace Basilisk.Injection
         /// <param name="instance"></param>
         /// <returns></returns>
         public static IInjectorBuilder AddInstance<T>(this IInjectorBuilder sb, T instance) where T : class
-        { sb.ContainerBuilder.RegisterInstance(instance); return sb; }
+            => sb.Configure(cb => cb.RegisterInstance(instance));
 
         /// <summary>
         /// 
@@ -60,7 +60,7 @@ namespace Basilisk.Injection
         /// <returns></returns>
         public static IInjectorBuilder AddHostedService<TImplementor>(this IInjectorBuilder sb, ServiceLifetime lifetime = ServiceLifetime.Singleton)
             where TImplementor : IHostedService
-        { sb.ContainerBuilder.RegisterType<TImplementor>().As<IHostedService>().ConfigureLifecycle(lifetime); return sb; }
+            => sb.Configure(cb => cb.RegisterType<TImplementor>().As<IHostedService>().ConfigureLifecycle(lifetime));
 
         /// <summary>
         /// 
