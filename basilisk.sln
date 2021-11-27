@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Gallery", "Basilis
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.XML", "Basilisk.XML\Basilisk.XML.csproj", "{D7935378-6E01-4E44-9BA9-256E699A6867}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.Injection", "Basilisk.Injection\Basilisk.Injection.csproj", "{186B48CE-9A89-4EA3-8954-277987067DF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.Inject", "Basilisk.Inject\Basilisk.Inject.csproj", "{186B48CE-9A89-4EA3-8954-277987067DF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basilisk.SystemServices", "Basilisk.SystemServices\Basilisk.SystemServices.csproj", "{031CEB9A-11EB-4182-9EFB-439AD07E5CF5}"
 EndProject

@@ -1,4 +1,4 @@
-﻿using Basilisk.Injection;
+﻿using Basilisk.Inject;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.WindowsServices;
 using System;

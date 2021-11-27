@@ -1,4 +1,4 @@
-﻿using Basilisk.Injection;
+﻿using Basilisk.Inject;
 using Basilisk.SystemServices;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -1,6 +1,6 @@
 ﻿using Basilisk.SystemServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Basilisk.Injection;
+using Basilisk.Inject;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Runtime.InteropServices;

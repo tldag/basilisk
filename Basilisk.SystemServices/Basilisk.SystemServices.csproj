@@ -11,7 +11,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="$(MicrosoftExtensionsHostingVersion)" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Systemd" Version="$(MicrosoftExtensionsHostingSystemdVersion)" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="$(MicrosoftExtensionsHostingWindowsServicesVersion)" />
-    <ProjectReference Include="$(BasiliskInjectionProject)" />
+    <ProjectReference Include="$(BasiliskInjectProject)" />
   </ItemGroup>
 
 </Project>
