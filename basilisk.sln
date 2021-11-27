@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Cryptography", "Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Testing", "Basilisk.Testing\Basilisk.Testing.csproj", "{E8FF9C76-9D08-4684-98BF-5EAD1DB3F4BA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Reflection", "Basilisk.Reflection\Basilisk.Reflection.csproj", "{08C53F1E-4F2C-4ADF-B291-3F03AFA63C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Reflect", "Basilisk.Reflect\Basilisk.Reflect.csproj", "{08C53F1E-4F2C-4ADF-B291-3F03AFA63C16}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basilisk.Tests", "Basilisk.Tests\Basilisk.Tests.csproj", "{92E823C2-2BCF-40EA-9A56-A892E3228487}"
 EndProject

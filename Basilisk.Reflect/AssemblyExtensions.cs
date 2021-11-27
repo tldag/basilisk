@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Basilisk.Reflection
+namespace Basilisk.Reflect
 {
     /// <summary>
     /// Assembly extensions.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Basilisk.Reflection
+namespace Basilisk.Reflect
 {
     /// <summary>
     /// <c>Type</c> extensions.

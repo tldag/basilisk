@@ -46,7 +46,7 @@
     <BasiliskGraphicsProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Graphics', 'Basilisk.Graphics.csproj' ))</BasiliskGraphicsProject>
     <BasiliskInjectProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Inject', 'Basilisk.Inject.csproj' ))</BasiliskInjectProject>
     <BasiliskIOProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.IO', 'Basilisk.IO.csproj' ))</BasiliskIOProject>
-    <BasiliskReflectionProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Reflection', 'Basilisk.Reflection.csproj' ))</BasiliskReflectionProject>
+    <BasiliskReflectProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Reflect', 'Basilisk.Reflect.csproj' ))</BasiliskReflectProject>
     <BasiliskSystemServicesProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.SystemServices', 'Basilisk.SystemServices.csproj' ))</BasiliskSystemServicesProject>
     <BasiliskTestingProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.Testing', 'Basilisk.Testing.csproj' ))</BasiliskTestingProject>
     <BasiliskXMLProject>$([MSBuild]::NormalizePath( $(MSBuildThisFileDirectory), 'Basilisk.XML', 'Basilisk.XML.csproj' ))</BasiliskXMLProject>

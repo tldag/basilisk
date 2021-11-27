@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "76ESgrlvepHKLrF0u6DRkJ55VvOGVSgj97zsqiii1F1BAF3TPf8pPKQqnZthpVCMWmV59FsYGx49sMIQX/cXBA==",
+  "success": true,
+  "projectFilePath": "C:\\source\\basilisk\\Basilisk.Reflection\\Basilisk.Reflection.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rhjoe\\.nuget\\packages\\microsoft.build.tasks.git\\1.1.1\\microsoft.build.tasks.git.1.1.1.nupkg.sha512",
+    "C:\\Users\\rhjoe\\.nuget\\packages\\microsoft.sourcelink.common\\1.1.1\\microsoft.sourcelink.common.1.1.1.nupkg.sha512",
+    "C:\\Users\\rhjoe\\.nuget\\packages\\microsoft.sourcelink.github\\1.1.1\\microsoft.sourcelink.github.1.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}

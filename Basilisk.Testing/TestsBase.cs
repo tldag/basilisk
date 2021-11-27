@@ -1,6 +1,6 @@
 ﻿using Basilisk.Core;
 using Basilisk.IO;
-using Basilisk.Reflection;
+using Basilisk.Reflect;
 using System;
 using System.Diagnostics;
 using System.IO;
